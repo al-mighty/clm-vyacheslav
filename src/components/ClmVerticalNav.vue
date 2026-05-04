@@ -121,4 +121,10 @@ onUnmounted(() => window.removeEventListener('keydown', onKey, true));
 }
 .vn-dot.active { background: var(--accent); }
 .vn-dot:hover { background: var(--ink-dim); }
+
+@media (max-width: 600px) {
+  .vn-controls { width: 24px; }
+  .vn-arrow { width: 22px; height: 22px; font-size: 11px; }
+  .vn-dot { width: 2px; height: 12px; }
+}
 </style>

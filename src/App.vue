@@ -158,4 +158,15 @@ const bgStyle = computed(() => {
 .clm-arrow:disabled { opacity: 0; pointer-events: none; }
 .clm-arrow.left { left: 24px; }
 .clm-arrow.right { right: 24px; }
+
+/* ===== Mobile ===== */
+@media (max-width: 600px) {
+  .clm-shell { grid-template-rows: 44px 1fr 48px; }
+  .clm-arrow { display: none; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .clm-shell { grid-template-rows: 36px 1fr 40px; }
+  .clm-arrow { width: 36px; height: 36px; font-size: 16px; }
+}
 </style>

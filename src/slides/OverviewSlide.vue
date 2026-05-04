@@ -140,4 +140,16 @@ const { t } = useI18n();
   line-height: 1.4;
   position: relative; z-index: 1;
 }
+
+@media (max-width: 600px) {
+  .overview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .overview-tile:nth-child(5),
+  .overview-tile:nth-child(6),
+  .overview-tile:nth-child(7) { grid-column: auto; }
+  .overview-tile { padding: 14px 12px; }
+  .tile-icon { font-size: 16px; margin-bottom: 8px; }
+  .tile-title { font-size: 15px; }
+  .tile-desc { font-size: 9px; }
+  .tile-num { font-size: 9px; margin-bottom: 6px; }
+}
 </style>

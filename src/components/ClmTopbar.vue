@@ -84,4 +84,13 @@ function onToggleLang() {
   transition: all 0.3s;
 }
 .lang-toggle:hover { background: var(--accent); color: var(--bg); }
+
+@media (max-width: 600px) {
+  .clm-topbar { padding: 0 12px; }
+  .clm-brand { font-size: 9px; gap: 8px; }
+  .clm-brand span:last-child { display: none; }
+  .clm-meta { gap: 10px; font-size: 9px; }
+  .clm-meta span:first-child { display: none; }
+  .lang-toggle { font-size: 9px; padding: 3px 8px; }
+}
 </style>

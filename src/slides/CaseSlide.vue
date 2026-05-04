@@ -141,4 +141,13 @@ const { t } = useI18n();
   color: var(--accent);
   font-family: var(--mono);
 }
+
+@media (max-width: 600px) {
+  .dna-row { grid-template-columns: 1fr; gap: 12px; }
+  .dna-card { padding: 20px 16px; }
+  .dna-card-icon { font-size: 20px; margin-bottom: 10px; }
+  .dna-card-label { font-size: 10px; margin-bottom: 12px; }
+  .dna-card-items { gap: 6px; }
+  .dna-card-items li { font-size: 13px; }
+}
 </style>

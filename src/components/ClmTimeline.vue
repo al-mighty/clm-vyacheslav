@@ -235,4 +235,26 @@ onMounted(() => requestAnimationFrame(() => { animate.value = true; }));
 .card-expand-leave-to {
   opacity: 0; transform: translateY(10px);
 }
+
+@media (max-width: 600px) {
+  .timeline-track { margin: 60px 0 16px; }
+  .timeline.collapsed .timeline-track { margin: 30px 0 10px; }
+  .tl-label { width: 80px; top: -52px; }
+  .tl-label.below { top: 22px; }
+  .tl-year { font-size: 9px; }
+  .tl-place { font-size: 11px; }
+  .tl-role { font-size: 8px; }
+  .tl-domain { font-size: 7px; padding: 1px 3px; }
+  .tl-dot { width: 10px; height: 10px; }
+
+  .detail-card { flex-direction: column; }
+  .detail-top { flex-wrap: wrap; gap: 8px; padding: 16px 16px 0; }
+  .detail-year { font-size: 28px; }
+  .detail-company { font-size: 20px; }
+  .detail-body { grid-template-columns: 1fr; gap: 16px; padding: 12px 16px 16px; }
+  .detail-section--main { border-left: none; border-right: none; padding: 0; border-top: 1px solid var(--line); padding-top: 12px; }
+  .detail-text { font-size: 13px; }
+  .detail-tag { font-size: 10px; padding: 3px 8px; }
+  .detail-close { top: 10px; right: 10px; width: 28px; height: 28px; }
+}
 </style>

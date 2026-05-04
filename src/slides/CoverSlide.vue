@@ -61,4 +61,15 @@ const { t } = useI18n();
   padding: 12px 20px; cursor: pointer; background: transparent; transition: all 0.3s;
 }
 .cover-cta:hover { background: var(--accent); color: var(--bg); }
+
+@media (max-width: 600px) {
+  .cover-top { flex-direction: column; gap: 16px; }
+  .cover-name { font-size: clamp(40px, 12vw, 64px); }
+  .cover-tagline { text-align: left; font-size: 11px; max-width: none; }
+  .cover-foot { flex-direction: column; gap: 24px; align-items: flex-start; }
+  .cover-stats { gap: 24px; flex-wrap: wrap; }
+  .cover-stat .num { font-size: 36px; }
+  .cover-stat .lbl { font-size: 9px; }
+  .cover-cta { font-size: 10px; padding: 10px 16px; }
+}
 </style>

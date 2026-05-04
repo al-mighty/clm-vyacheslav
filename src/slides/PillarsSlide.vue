@@ -122,4 +122,12 @@ function toggle(i) {
 .pillar--1 .pillar-detail { border-top: 1px solid rgba(255, 91, 58, 0.15); }
 .pillar--2 .pillar-detail { border-top: 1px solid rgba(100, 150, 255, 0.15); }
 .pillar.expanded .pillar-detail { max-height: 200px; opacity: 1; }
+
+@media (max-width: 600px) {
+  .pillars-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+  .pillar { padding: 20px 16px; }
+  .pillar-icon { font-size: 20px; margin-bottom: 12px; }
+  .pillar-title { font-size: 24px; margin: 12px 0 8px; }
+  .pillar-desc { font-size: 13px; }
+}
 </style>

@@ -49,4 +49,12 @@ onMounted(() => requestAnimationFrame(() => { animate.value = true; }));
 .stack-bar.alt .stack-bar-fill { background: linear-gradient(90deg, var(--accent-2), #d44a2a); }
 .stack-bar-years { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); text-align: right; }
 .stack-bar:hover .stack-bar-name { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .stack-bars { gap: 10px; }
+  .stack-bar { grid-template-columns: 100px 1fr 40px; gap: 8px; }
+  .stack-bar-name { font-size: 11px; }
+  .stack-bar-years { font-size: 10px; }
+  .stack-bar-track { height: 5px; }
+}
 </style>

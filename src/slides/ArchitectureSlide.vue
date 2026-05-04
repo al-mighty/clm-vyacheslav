@@ -141,4 +141,14 @@ function selectLayer(i) {
 .arch-fade-leave-active { transition: all 0.15s ease-in; }
 .arch-fade-enter-from { opacity: 0; transform: translateY(6px); }
 .arch-fade-leave-to { opacity: 0; transform: translateY(-4px); }
+
+@media (max-width: 600px) {
+  .arch-layout { grid-template-columns: 1fr; gap: 16px; }
+  .arch-layer { padding: 10px 12px; }
+  .layer-label { font-size: 8px; margin-bottom: 6px; }
+  .layer-node { font-size: 10px; padding: 4px 8px; }
+  .arch-detail-title { font-size: 20px; }
+  .arch-detail-text { font-size: 13px; padding-left: 14px; }
+  .arch-detail-why { font-size: 13px; padding: 10px 12px; }
+}
 </style>

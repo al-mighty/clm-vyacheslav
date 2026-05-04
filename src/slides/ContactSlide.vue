@@ -36,4 +36,9 @@ const { t } = useI18n();
   text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s;
 }
 .contact-item a:hover { border-color: var(--accent); }
+
+@media (max-width: 600px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
+  .contact-item a { font-size: 13px; }
+}
 </style>

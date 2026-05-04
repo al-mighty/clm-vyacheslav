@@ -65,3 +65,17 @@
     --slide-padding: 32px 40px;
   }
 }
+
+/* Mobile phones */
+@media (max-width: 600px) {
+  :root {
+    --slide-padding: 20px 16px;
+  }
+}
+
+/* Phone landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+  :root {
+    --slide-padding: 12px 24px;
+  }
+}

@@ -28,4 +28,11 @@ defineProps({
 .skill-tag.lg { font-size: 22px; padding: 12px 24px; color: var(--accent); border-color: var(--accent); }
 .skill-tag.md { font-size: 16px; padding: 10px 20px; }
 .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.05); }
+
+@media (max-width: 600px) {
+  .skill-cloud { padding: 0; gap: 6px; }
+  .skill-tag { font-size: 11px; padding: 5px 10px; }
+  .skill-tag.lg { font-size: 16px; padding: 8px 14px; }
+  .skill-tag.md { font-size: 13px; padding: 6px 12px; }
+}
 </style>

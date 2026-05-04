@@ -73,4 +73,12 @@ defineEmits(['prev', 'next', 'goto']);
   color: var(--ink-dim);
   letter-spacing: 0.15em;
 }
+
+@media (max-width: 600px) {
+  .clm-bottom { padding: 0 12px; }
+  .nav-btn { width: 32px; height: 32px; font-size: 14px; }
+  .nav-dots { gap: 4px; }
+  .nav-dot { width: 18px; height: 3px; }
+  .progress-info { display: none; }
+}
 </style>

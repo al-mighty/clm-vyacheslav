@@ -42,4 +42,9 @@ const stack = [
 .stack-layout { display: grid; grid-template-columns: 320px 1fr; gap: 64px; flex: 1; }
 .stack-side h2 { margin-bottom: 24px; }
 .stack-side p { color: var(--ink-dim); font-size: 16px; }
+
+@media (max-width: 600px) {
+  .stack-layout { grid-template-columns: 1fr; gap: 20px; }
+  .stack-side p { font-size: 14px; }
+}
 </style>

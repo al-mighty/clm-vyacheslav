@@ -85,4 +85,13 @@ defineProps({
   color: var(--accent);
   margin-bottom: var(--sp-5);
 }
+
+@media (max-width: 600px) {
+  .clm-slide { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .slide-layer--front { transform: translateX(20px) scale(0.99); }
+  .clm-slide.prev .slide-layer--front { transform: translateX(-20px) scale(0.99); }
+  .slide-layer--back { transform: translateX(8px); }
+  .clm-slide.prev .slide-layer--back { transform: translateX(-8px); }
+  .slide-eyebrow { font-size: 10px; letter-spacing: 0.2em; margin-bottom: var(--sp-3); }
+}
 </style>
