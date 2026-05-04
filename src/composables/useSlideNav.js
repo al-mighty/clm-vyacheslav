@@ -69,6 +69,7 @@ export function useSlideNav(totalSlides) {
   watch(current, (newVal, oldVal) => {
     const exitTime = Math.floor((Date.now() - slideEnter.value) / 1000);
     tracking.slideExit(`slide-${oldVal}`, exitTime);
+    tracking.slideView(`slide-${newVal}`, `Slide ${newVal + 1}`);
     slideEnter.value = Date.now();
     slideViewTime.value = 0;
   });

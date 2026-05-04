@@ -7,13 +7,14 @@
     <div class="clm-meta">
       <span>{{ t.nav.session }} &middot; <strong>{{ sessionTime }}</strong></span>
       <span>{{ t.nav.slide }} &middot; <strong>{{ current + 1 }}/{{ total }}</strong></span>
-      <button class="lang-toggle" @click="toggleLocale">{{ locale === 'en' ? 'RU' : 'EN' }}</button>
+      <button class="lang-toggle" @click="onToggleLang">{{ locale === 'en' ? 'RU' : 'EN' }}</button>
     </div>
   </header>
 </template>
 
 <script setup>
 import { useI18n } from '@/i18n/index.js';
+import { useVeevaTracking } from '@/composables/useVeevaTracking.js';
 
 defineProps({
   sessionTime: { type: String, default: '00:00' },
@@ -22,6 +23,12 @@ defineProps({
 });
 
 const { t, locale, toggleLocale } = useI18n();
+const { langToggle } = useVeevaTracking();
+
+function onToggleLang() {
+  toggleLocale();
+  langToggle(locale.value);
+}
 </script>
 
 <style scoped>
