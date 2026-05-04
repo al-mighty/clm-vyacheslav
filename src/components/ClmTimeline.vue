@@ -236,6 +236,22 @@ onMounted(() => requestAnimationFrame(() => { animate.value = true; }));
   opacity: 0; transform: translateY(10px);
 }
 
+@media (max-width: 900px) and (min-width: 601px) {
+  .timeline-track { margin: 70px 0 20px; }
+  .tl-label { width: 100px; top: -54px; }
+  .tl-label.below { top: 24px; }
+  .tl-year { font-size: 10px; }
+  .tl-place { font-size: 12px; }
+  .tl-role { font-size: 8px; }
+  .tl-domain { font-size: 7px; }
+  .tl-dot { width: 12px; height: 12px; }
+
+  .detail-top { gap: 12px; }
+  .detail-year { font-size: 32px; }
+  .detail-company { font-size: 22px; }
+  .detail-body { grid-template-columns: 160px 1fr auto; gap: 20px; }
+}
+
 @media (max-width: 600px) {
   .timeline-track { margin: 60px 0 16px; }
   .timeline.collapsed .timeline-track { margin: 30px 0 10px; }

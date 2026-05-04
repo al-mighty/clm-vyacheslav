@@ -141,6 +141,15 @@ const { t } = useI18n();
   position: relative; z-index: 1;
 }
 
+@media (max-width: 900px) and (min-width: 601px) {
+  .overview-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .overview-tile:nth-child(5),
+  .overview-tile:nth-child(6),
+  .overview-tile:nth-child(7) { grid-column: auto; }
+  .overview-tile { padding: 16px 14px; }
+  .tile-title { font-size: 16px; }
+}
+
 @media (max-width: 600px) {
   .overview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .overview-tile:nth-child(5),

@@ -62,6 +62,12 @@ const { t } = useI18n();
 }
 .cover-cta:hover { background: var(--accent); color: var(--bg); }
 
+@media (max-width: 900px) and (min-width: 601px) {
+  .cover-name { font-size: clamp(48px, 10vw, 80px); }
+  .cover-stats { gap: 40px; }
+  .cover-stat .num { font-size: 44px; }
+}
+
 @media (max-width: 600px) {
   .cover-top { flex-direction: column; gap: 16px; }
   .cover-name { font-size: clamp(40px, 12vw, 64px); }

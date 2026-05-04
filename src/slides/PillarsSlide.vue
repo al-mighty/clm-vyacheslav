@@ -123,6 +123,12 @@ function toggle(i) {
 .pillar--2 .pillar-detail { border-top: 1px solid rgba(100, 150, 255, 0.15); }
 .pillar.expanded .pillar-detail { max-height: 200px; opacity: 1; }
 
+@media (max-width: 900px) and (min-width: 601px) {
+  .pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .pillar { padding: 24px 20px; }
+  .pillar-title { font-size: 26px; }
+}
+
 @media (max-width: 600px) {
   .pillars-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
   .pillar { padding: 20px 16px; }
