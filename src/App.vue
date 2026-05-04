@@ -15,7 +15,7 @@
       <button class="clm-arrow left" :disabled="isFirst" @click="prev">&lsaquo;</button>
       <button class="clm-arrow right" :disabled="isLast" @click="next">&rsaquo;</button>
 
-      <CoverSlide       :active="current === 0" :is-prev="current > 0" @next="next" />
+      <CoverSlide       :active="current === 0" :is-prev="current > 0" @next="next" @autoplay="startAutoplay" />
       <OverviewSlide     :active="current === 1" :is-prev="current > 1" @goto="goTo" />
       <PillarsSlide      :active="current === 2" :is-prev="current > 2" />
       <TimelineSlide     :active="current === 3" :is-prev="current > 3" />
@@ -57,7 +57,7 @@ import ContactSlide from '@/slides/ContactSlide.vue';
 import { useSlideNav } from '@/composables/useSlideNav.js';
 
 const totalSlides = 9;
-const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo } = useSlideNav(totalSlides);
+const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo, startAutoplay } = useSlideNav(totalSlides);
 
 // Background parallax — orbs shift based on slide index
 const bgStyle = computed(() => {

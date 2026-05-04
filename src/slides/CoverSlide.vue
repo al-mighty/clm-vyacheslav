@@ -22,7 +22,7 @@
           <div class="lbl">{{ t.cover.stat3 }}</div>
         </div>
       </div>
-      <button class="cover-cta" @click="$emit('next')">{{ t.cover.cta }}</button>
+      <button class="cover-cta" @click="$emit('autoplay')">{{ t.cover.cta }}</button>
     </div>
   </ClmSlide>
 </template>
@@ -32,7 +32,7 @@ import ClmSlide from '@/components/ClmSlide.vue';
 import { useI18n } from '@/i18n/index.js';
 
 defineProps({ active: Boolean, isPrev: Boolean });
-defineEmits(['next']);
+defineEmits(['next', 'autoplay']);
 
 const { t } = useI18n();
 </script>

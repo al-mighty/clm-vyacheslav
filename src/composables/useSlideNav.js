@@ -13,26 +13,52 @@ export function useSlideNav(totalSlides) {
   const isFirst = computed(() => current.value === 0);
   const isLast = computed(() => current.value === totalSlides - 1);
 
+  const autoplay = ref(false);
+  let autoplayTimer = null;
+
+  function vibrate() {
+    if (navigator.vibrate) navigator.vibrate(15);
+  }
+
   function next() {
-    if (current.value < totalSlides - 1) current.value++;
+    if (current.value < totalSlides - 1) { current.value++; vibrate(); }
   }
 
   function prev() {
-    if (current.value > 0) current.value--;
+    if (current.value > 0) { current.value--; vibrate(); }
+  }
+
+  function stopAutoplay() {
+    autoplay.value = false;
+    clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
+
+  function startAutoplay(intervalMs = 5000) {
+    stopAutoplay();
+    autoplay.value = true;
+    next();
+    autoplayTimer = setInterval(() => {
+      if (current.value >= totalSlides - 1) { stopAutoplay(); return; }
+      next();
+    }, intervalMs);
   }
 
   function goTo(i) {
     if (i >= 0 && i < totalSlides) current.value = i;
   }
 
-  // Keyboard
+  // Keyboard — stops autoplay on manual input
   function onKey(e) {
-    if (e.key === 'ArrowRight') next();
-    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') { stopAutoplay(); next(); }
+    if (e.key === 'ArrowLeft') { stopAutoplay(); prev(); }
   }
 
-  // Touch swipe
-  useSwipe(next, prev);
+  // Touch swipe — stops autoplay
+  useSwipe(
+    () => { stopAutoplay(); next(); },
+    () => { stopAutoplay(); prev(); },
+  );
 
   // Wheel scroll navigation (debounced)
   let wheelLocked = false;
@@ -41,6 +67,7 @@ export function useSlideNav(totalSlides) {
     const delta = e.deltaY || e.detail;
     if (Math.abs(delta) < 30) return;
     wheelLocked = true;
+    stopAutoplay();
     if (delta > 0) next();
     else prev();
     setTimeout(() => { wheelLocked = false; }, 600);
@@ -64,6 +91,7 @@ export function useSlideNav(totalSlides) {
     window.removeEventListener('keydown', onKey);
     window.removeEventListener('wheel', onWheel);
     clearInterval(timer);
+    stopAutoplay();
   });
 
   watch(current, (newVal, oldVal) => {
@@ -83,6 +111,9 @@ export function useSlideNav(totalSlides) {
     next,
     prev,
     goTo,
+    startAutoplay,
+    stopAutoplay,
+    autoplay,
     tracking,
   };
 }
