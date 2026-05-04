@@ -12,8 +12,16 @@ export function useSwipe(onLeft, onRight, { minDistance = 50 } = {}) {
   const onTouchEnd = (e) => {
     const dx = e.changedTouches[0].clientX - startX;
     const dy = e.changedTouches[0].clientY - startY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minDistance) {
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    // Horizontal swipe — left/right
+    if (absDx > absDy && absDx > minDistance) {
       dx < 0 ? onLeft() : onRight();
+    }
+    // Vertical swipe — down=next, up=prev
+    else if (absDy > absDx && absDy > minDistance) {
+      dy < 0 ? onLeft() : onRight();
     }
   };
 
