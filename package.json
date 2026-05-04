@@ -1,0 +1,34 @@
+{
+  "name": "clm-vyacheslav",
+  "version": "0.1.0",
+  "description": "CLM-style detail aid presentation · Senior Fullstack Engineer portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite preview",
+    "pack": "vite build && node scripts/veeva-pack.js"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "keywords": [
+    "veeva",
+    "clm",
+    "detail-aid",
+    "vue",
+    "portfolio"
+  ],
+  "author": {
+    "name": "Vyacheslav Kovalev",
+    "email": "dev.vyacheslav@gmail.com",
+    "url": "https://t.me/es_kanor"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@vitejs/plugin-vue": "^6.0.6",
+    "vue": "^3.5.33"
+  }
+}

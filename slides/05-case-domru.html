@@ -1,0 +1,164 @@
+<!--
+  Slide 05 · Case Study: Dom.ru
+  Migration from PHP monolith to NestJS microservices.
+  Architecture diagram + metrics.
+-->
+
+<link rel="stylesheet" href="../shared/styles/tokens.css">
+<link rel="stylesheet" href="../shared/styles/base.css">
+
+<style>
+  .slide {
+    height: 100vh;
+    padding: 48px 80px;
+    display: flex;
+    flex-direction: column;
+  }
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    flex: 1;
+  }
+  .case-visual {
+    border: 1px solid var(--line);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--bg-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .case-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(244, 241, 234, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 241, 234, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+  .arch-diagram { position: relative; z-index: 1; }
+  .arch-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+  .arch-row:last-child { margin-bottom: 0; }
+  .arch-node {
+    flex: 1;
+    border: 1px solid var(--line-2);
+    padding: 12px;
+    text-align: center;
+    background: var(--bg);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+  .arch-node.hl { border-color: var(--accent); color: var(--accent); }
+  .arch-node:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .arch-arrow { color: var(--ink-dim); font-family: var(--mono); }
+  .arch-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ink-dim);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .case-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .case-quote {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-style: italic;
+    line-height: 1.4;
+    margin-bottom: 32px;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding-left: 24px;
+  }
+  .case-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .case-metric .num {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--accent);
+    font-family: var(--serif);
+    line-height: 1;
+  }
+  .case-metric .num em { font-style: italic; }
+  .case-metric .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+</style>
+
+<section class="slide">
+  <div class="slide-num">05 / 08</div>
+  <div class="slide-eyebrow">Case &middot; Dom.ru telecom</div>
+  <h2>Migration at <em>scale</em>.</h2>
+  <div class="case-grid">
+    <div class="case-visual">
+      <div class="arch-diagram">
+        <div class="arch-label">Before &mdash; monolith</div>
+        <div class="arch-row">
+          <div class="arch-node">PHP / legacy</div>
+        </div>
+        <div class="arch-row" style="justify-content: center; margin: 24px 0;">
+          <span class="arch-arrow">&darr; migration &darr;</span>
+        </div>
+        <div class="arch-label">After &mdash; microservices</div>
+        <div class="arch-row">
+          <div class="arch-node hl">Node &middot; NestJS</div>
+          <span class="arch-arrow">&hArr;</span>
+          <div class="arch-node">Kafka</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-node">Mongo</div>
+          <span class="arch-arrow">&middot;</span>
+          <div class="arch-node">Redis</div>
+          <span class="arch-arrow">&middot;</span>
+          <div class="arch-node">k8s</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-text">
+      <div class="case-quote">&laquo;Transferred key personal account and subscription services from a PHP monolith to a NestJS microservice architecture with Kafka as the event bus.&raquo;</div>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="num">6M+</div>
+          <div class="lbl">Active users</div>
+        </div>
+        <div class="case-metric">
+          <div class="num"><em>5+</em></div>
+          <div class="lbl">Cross-fn teams</div>
+        </div>
+        <div class="case-metric">
+          <div class="num">2.4y</div>
+          <div class="lbl">In role</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="module">
+  import tracking from '../shared/tracking/veeva-clm.js';
+  tracking.slideView('05-case-domru', 'Case Dom.ru');
+</script>

@@ -1,0 +1,104 @@
+<!--
+  Slide 07 · Tooling Spectrum / Skill Cloud
+  Tag cloud with size variants (lg, md, default).
+-->
+
+<link rel="stylesheet" href="../shared/styles/tokens.css">
+<link rel="stylesheet" href="../shared/styles/base.css">
+
+<style>
+  .slide {
+    height: 100vh;
+    padding: 48px 80px;
+    display: flex;
+    flex-direction: column;
+  }
+  .skill-cloud {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0 80px;
+  }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 8px 16px;
+    border: 1px solid var(--line-2);
+    color: var(--ink);
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .skill-tag.lg {
+    font-size: 22px;
+    padding: 12px 24px;
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .skill-tag.md {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: scale(1.05);
+  }
+</style>
+
+<section class="slide">
+  <div class="slide-num">07 / 08</div>
+  <div class="slide-eyebrow">Tooling spectrum</div>
+  <h2>The full <em>toolkit</em>.</h2>
+  <div class="skill-cloud" id="skill-cloud"></div>
+</section>
+
+<script type="module">
+  import tracking from '../shared/tracking/veeva-clm.js';
+
+  const skills = [
+    { name: 'Node.js', size: 'lg' },
+    { name: 'NestJS', size: 'lg' },
+    { name: 'TypeScript', size: 'lg' },
+    { name: 'React', size: 'lg' },
+    { name: 'PostgreSQL', size: 'lg' },
+    { name: 'Next.js', size: 'md' },
+    { name: 'Kafka', size: 'md' },
+    { name: 'Kubernetes', size: 'md' },
+    { name: 'Docker', size: 'md' },
+    { name: 'MongoDB', size: 'md' },
+    { name: 'Redis', size: 'md' },
+    { name: 'GraphQL', size: 'md' },
+    { name: 'RabbitMQ', size: '' },
+    { name: 'BullMQ', size: '' },
+    { name: 'Vue.js', size: '' },
+    { name: 'Redux', size: '' },
+    { name: 'Storybook', size: '' },
+    { name: 'GitLab CI', size: '' },
+    { name: 'Jenkins', size: '' },
+    { name: 'Jest', size: '' },
+    { name: 'OpenAPI', size: '' },
+    { name: 'WebSocket', size: '' },
+    { name: 'Strapi', size: '' },
+    { name: 'Nginx', size: '' },
+    { name: 'S3', size: '' },
+    { name: 'OpenSearch', size: '' },
+    { name: 'Grafana', size: '' },
+    { name: 'n8n', size: '' },
+    { name: 'AI / LLM', size: 'md' },
+    { name: 'Python', size: '' }
+  ];
+
+  const container = document.getElementById('skill-cloud');
+  skills.forEach(s => {
+    const tag = document.createElement('span');
+    tag.className = 'skill-tag' + (s.size ? ` ${s.size}` : '');
+    tag.textContent = s.name;
+    container.appendChild(tag);
+  });
+
+  tracking.slideView('07-skills', 'Tooling Spectrum');
+</script>

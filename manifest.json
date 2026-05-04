@@ -1,0 +1,36 @@
+{
+  "id": "VK-2026-001",
+  "name": "Senior Fullstack Engineer · Vyacheslav Kovalev",
+  "version": "0.1.0",
+  "type": "detail-aid",
+  "format": "veeva-clm-compatible",
+  "platform": "ipad",
+  "viewport": {
+    "width": 1024,
+    "height": 768,
+    "orientation": "landscape"
+  },
+  "entry": "index.html",
+  "slides": [
+    { "id": "01-cover", "title": "Cover", "file": "slides/01-cover.html", "duration": 15 },
+    { "id": "02-pillars", "title": "Three Pillars", "file": "slides/02-pillars.html", "duration": 30 },
+    { "id": "03-timeline", "title": "Career Timeline", "file": "slides/03-timeline.html", "duration": 25 },
+    { "id": "04-stack", "title": "Tech Stack by Years", "file": "slides/04-stack.html", "duration": 20 },
+    { "id": "05-case-domru", "title": "Case · Dom.ru", "file": "slides/05-case-domru.html", "duration": 30 },
+    { "id": "06-architecture", "title": "Architecture · Interactive", "file": "slides/06-architecture.html", "duration": 45 },
+    { "id": "07-skills", "title": "Tooling Spectrum", "file": "slides/07-skills.html", "duration": 15 },
+    { "id": "08-contact", "title": "Contact", "file": "slides/08-contact.html", "duration": 20 }
+  ],
+  "tracking": {
+    "enabled": true,
+    "events": ["slide_view", "slide_exit", "hotspot_click", "pillar_expand", "session_start", "session_end"],
+    "api": "com.veeva.clm"
+  },
+  "author": {
+    "name": "Vyacheslav Kovalev",
+    "email": "dev.vyacheslav@gmail.com",
+    "telegram": "@es_kanor"
+  },
+  "created": "2026-05-03",
+  "tags": ["portfolio", "fullstack", "nodejs", "react", "clm-demo"]
+}

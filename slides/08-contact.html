@@ -1,0 +1,63 @@
+<!--
+  Slide 08 · Contact / CTA
+  Final slide with contact details and call-to-action.
+-->
+
+<link rel="stylesheet" href="../shared/styles/tokens.css">
+<link rel="stylesheet" href="../shared/styles/base.css">
+
+<style>
+  .slide {
+    height: 100vh;
+    padding: 48px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .slide h1 { max-width: 900px; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 48px;
+    width: 100%;
+    max-width: 800px;
+  }
+  .contact-item h3 { color: var(--ink-dim); margin-bottom: 12px; }
+  .contact-item a {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .contact-item a:hover { border-color: var(--accent); }
+</style>
+
+<section class="slide">
+  <div class="slide-num">08 / 08</div>
+  <div class="slide-eyebrow">Next step</div>
+  <h1>Let's <em>talk</em>.</h1>
+  <p class="lead" style="margin-top: 24px;">Open to senior fullstack and architecture-track roles. Remote, hybrid, or relocation considered.</p>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <h3>Email</h3>
+      <a href="mailto:dev.vyacheslav@gmail.com">dev.vyacheslav@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <h3>Telegram</h3>
+      <a href="https://t.me/es_kanor" target="_blank">@es_kanor</a>
+    </div>
+    <div class="contact-item">
+      <h3>Phone</h3>
+      <a href="tel:+79112201606">+7 (911) 220-16-06</a>
+    </div>
+  </div>
+</section>
+
+<script type="module">
+  import tracking from '../shared/tracking/veeva-clm.js';
+  tracking.slideView('08-contact', 'Contact');
+</script>

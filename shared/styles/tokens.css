@@ -1,0 +1,40 @@
+/**
+ * Design tokens — единственное место для цветов, шрифтов, отступов.
+ * Меняйте здесь — обновится по всему проекту.
+ */
+
+:root {
+  /* Colors */
+  --bg: #0a0e1a;
+  --bg-2: #131829;
+  --ink: #f4f1ea;
+  --ink-dim: #8b94a8;
+  --accent: #d4ff3a;
+  --accent-2: #ff5b3a;
+  --line: rgba(244, 241, 234, 0.08);
+  --line-2: rgba(244, 241, 234, 0.16);
+
+  /* Typography */
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Spacing scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 80px;
+
+  /* Animation */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 0.6s;
+
+  /* Layout — стандарт iPad CLM */
+  --slide-width: 1024px;
+  --slide-height: 768px;
+  --slide-padding: 48px 80px;
+}
