@@ -1,5 +1,5 @@
 <template>
-  <div class="vn-wrap" @wheel.prevent="onWheel">
+  <div class="vn-wrap" @wheel.prevent="onWheel" @touchstart="onTouchStart" @touchend.prevent="onTouchEnd">
     <div class="vn-viewport">
       <div class="vn-track" :style="{ transform: `translateY(-${page * 100}%)` }">
         <slot />
@@ -40,6 +40,18 @@ function onWheel(e) {
   if (e.deltaY > 0 && page.value < props.totalPages - 1) page.value++;
   else if (e.deltaY < 0 && page.value > 0) page.value--;
   setTimeout(() => { wheelLocked = false; }, 500);
+}
+
+let touchStartY = 0;
+function onTouchStart(e) {
+  touchStartY = e.changedTouches[0].clientY;
+}
+function onTouchEnd(e) {
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dy) < 40) return;
+  e.stopPropagation();
+  if (dy < 0 && page.value < props.totalPages - 1) page.value++;
+  else if (dy > 0 && page.value > 0) page.value--;
 }
 
 function onKey(e) {
