@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
+          rsync -avz --delete --exclude='*.apk' -e "ssh -i ~/.ssh/deploy_key" \
             dist/ root@${{ secrets.VPS_HOST }}:/opt/cheslav/clm/
 
   deploy-pages:
