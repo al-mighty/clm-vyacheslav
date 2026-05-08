@@ -2,8 +2,20 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useSwipe } from './useSwipe.js';
 import { useVeevaTracking } from './useVeevaTracking.js';
 
+const SLIDE_NAMES = ['cover', 'overview', 'pillars', 'timeline', 'stack', 'case', 'architecture', 'skills', 'contact'];
+
+function slideFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) return 0;
+  const idx = SLIDE_NAMES.indexOf(hash);
+  if (idx !== -1) return idx;
+  const num = parseInt(hash, 10);
+  if (!isNaN(num) && num >= 1 && num <= SLIDE_NAMES.length) return num - 1;
+  return 0;
+}
+
 export function useSlideNav(totalSlides) {
-  const current = ref(0);
+  const current = ref(slideFromHash());
   const slideEnter = ref(Date.now());
   const sessionStart = Date.now();
   const sessionTime = ref('00:00');
@@ -100,6 +112,7 @@ export function useSlideNav(totalSlides) {
     tracking.slideView(`slide-${newVal}`, `Slide ${newVal + 1}`);
     slideEnter.value = Date.now();
     slideViewTime.value = 0;
+    history.replaceState(null, '', `#${SLIDE_NAMES[newVal] || newVal + 1}`);
   });
 
   return {
