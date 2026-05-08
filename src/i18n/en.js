@@ -227,6 +227,10 @@ export default {
     email: 'Email',
     telegram: 'Telegram',
     phone: 'Phone',
+    demo: 'Mobile Demo',
+    demoDesc: 'PatternQuest — logic game built with Expo + NestJS',
+    demoAndroid: 'Download APK',
+    demoSource: 'Source code',
   },
 
   // Navigation

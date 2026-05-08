@@ -16,6 +16,24 @@
         <a href="tel:+79112201606">+7 (911) 220-16-06</a>
       </div>
     </div>
+    <div class="demo-section">
+      <div class="demo-badge">
+        <span class="demo-icon">&#9654;</span>
+        <div>
+          <h3>{{ t.contact.demo }}</h3>
+          <p class="demo-desc">{{ t.contact.demoDesc }}</p>
+        </div>
+      </div>
+      <div class="demo-links">
+        <a href="./patternquest.apk" class="demo-btn" download>
+          <span class="demo-btn-icon">&#9660;</span>
+          {{ t.contact.demoAndroid }}
+        </a>
+        <a href="https://github.com/al-mighty/patternquest-demo" target="_blank" class="demo-btn demo-btn-ghost">
+          {{ t.contact.demoSource }}
+        </a>
+      </div>
+    </div>
   </ClmSlide>
 </template>
 
@@ -37,8 +55,41 @@ const { t } = useI18n();
 }
 .contact-item a:hover { border-color: var(--accent); }
 
+.demo-section {
+  margin-top: 48px; padding-top: 32px;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; width: 100%; max-width: 800px;
+}
+.demo-badge { display: flex; align-items: center; gap: 16px; }
+.demo-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--bg-2); border: 1px solid var(--line-2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-size: 18px; flex-shrink: 0;
+}
+.demo-badge h3 { color: var(--ink); margin: 0; font-size: 15px; font-weight: 500; }
+.demo-desc { color: var(--ink-dim); font-family: var(--mono); font-size: 11px; margin-top: 4px; }
+.demo-links { display: flex; gap: 12px; flex-shrink: 0; }
+.demo-btn {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 10px 18px; border-radius: 6px; transition: all 0.3s;
+  background: var(--accent); color: var(--bg); border: 1px solid var(--accent);
+  display: flex; align-items: center; gap: 6px;
+}
+.demo-btn:hover { opacity: 0.85; }
+.demo-btn-icon { font-size: 10px; }
+.demo-btn-ghost {
+  background: transparent; color: var(--accent); border-color: var(--line-2);
+}
+.demo-btn-ghost:hover { border-color: var(--accent); }
+
 @media (max-width: 600px) {
   .contact-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
   .contact-item a { font-size: 13px; }
+  .demo-section { flex-direction: column; align-items: flex-start; margin-top: 32px; padding-top: 24px; }
+  .demo-links { flex-direction: column; width: 100%; }
+  .demo-btn { justify-content: center; font-size: 10px; padding: 10px 14px; }
 }
 </style>
