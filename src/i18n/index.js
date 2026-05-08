@@ -4,8 +4,13 @@ import ru from './ru.js';
 
 const locales = { en, ru };
 
+function detectLocale() {
+  const lang = (navigator.language || '').split('-')[0];
+  return lang === 'ru' ? 'ru' : 'en';
+}
+
 const state = reactive({
-  locale: 'en',
+  locale: detectLocale(),
 });
 
 export function useI18n() {
