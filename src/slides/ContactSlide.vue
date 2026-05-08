@@ -25,7 +25,11 @@
         </div>
       </div>
       <div class="demo-links">
-        <a href="./patternquest.apk" class="demo-btn" download>
+        <a href="./game/" class="demo-btn" target="_blank">
+          <span class="demo-btn-icon">&#9654;</span>
+          {{ t.contact.demoPlay }}
+        </a>
+        <a href="./patternquest.apk" class="demo-btn demo-btn-ghost" download>
           <span class="demo-btn-icon">&#9660;</span>
           {{ t.contact.demoAndroid }}
         </a>

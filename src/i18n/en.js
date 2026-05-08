@@ -229,6 +229,7 @@ export default {
     phone: 'Phone',
     demo: 'Mobile Demo',
     demoDesc: 'PatternQuest — logic game built with Expo + NestJS',
+    demoPlay: 'Play in browser',
     demoAndroid: 'Download APK',
     demoSource: 'Source code',
   },
