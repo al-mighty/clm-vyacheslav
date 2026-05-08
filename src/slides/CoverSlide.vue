@@ -1,9 +1,14 @@
 <template>
   <ClmSlide :active="active" :is-prev="isPrev">
     <div class="cover-top">
-      <div class="cover-name">
-        Vyacheslav<br>
-        <em>Kovalev.</em>
+      <div class="cover-left">
+        <div class="cover-avatar">
+          <img src="/avatar.jpg" alt="Vyacheslav Kovalev" />
+        </div>
+        <div class="cover-name">
+          Vyacheslav<br>
+          <em>Kovalev.</em>
+        </div>
       </div>
       <div class="cover-tagline" v-text="t.cover.tagline" />
     </div>
@@ -39,6 +44,12 @@ const { t } = useI18n();
 
 <style scoped>
 .cover-top { display: flex; justify-content: space-between; align-items: flex-start; flex: 1; }
+.cover-left { display: flex; align-items: center; gap: 32px; }
+.cover-avatar {
+  width: 120px; height: 120px; border-radius: 50%; overflow: hidden;
+  border: 2px solid var(--accent); flex-shrink: 0;
+}
+.cover-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .cover-name {
   font-family: var(--serif);
   font-size: clamp(64px, 10vw, 140px);
@@ -75,6 +86,8 @@ const { t } = useI18n();
 
 @media (max-width: 600px) {
   .cover-top { flex-direction: column; gap: 16px; }
+  .cover-left { gap: 16px; }
+  .cover-avatar { width: 72px; height: 72px; }
   .cover-name { font-size: clamp(40px, 12vw, 64px); }
   .cover-tagline { text-align: left; font-size: 11px; max-width: none; }
   .cover-foot { flex-direction: column; gap: 24px; align-items: flex-start; }
