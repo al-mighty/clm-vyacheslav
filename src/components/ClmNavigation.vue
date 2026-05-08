@@ -1,5 +1,8 @@
 <template>
   <footer class="clm-bottom">
+    <div v-if="autoplayProgress > 0" class="progress-bar">
+      <div class="progress-fill" :style="{ width: autoplayProgress * 100 + '%' }" />
+    </div>
     <button class="nav-btn" :disabled="isFirst" @click="$emit('prev')">&lsaquo;</button>
     <div class="nav-dots">
       <div
@@ -27,6 +30,7 @@ defineProps({
   isFirst: Boolean,
   isLast: Boolean,
   viewTime: { type: Number, default: 0 },
+  autoplayProgress: { type: Number, default: 0 },
 });
 
 defineEmits(['prev', 'next', 'goto']);
@@ -41,6 +45,15 @@ defineEmits(['prev', 'next', 'goto']);
   border-top: 1px solid var(--line);
   background: rgba(10, 14, 26, 0.6);
   backdrop-filter: blur(20px);
+  position: relative;
+}
+.progress-bar {
+  position: absolute; top: -2px; left: 0; right: 0; height: 2px;
+  background: transparent;
+}
+.progress-fill {
+  height: 100%; background: var(--accent);
+  transition: width 50ms linear;
 }
 .nav-btn {
   background: transparent;

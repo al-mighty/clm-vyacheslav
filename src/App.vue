@@ -32,6 +32,7 @@
       :is-first="isFirst"
       :is-last="isLast"
       :view-time="slideViewTime"
+      :autoplay-progress="autoplayProgress"
       @prev="prev"
       @next="next"
       @goto="goTo"
@@ -57,7 +58,7 @@ import ContactSlide from '@/slides/ContactSlide.vue';
 import { useSlideNav } from '@/composables/useSlideNav.js';
 
 const totalSlides = 9;
-const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo, startAutoplay } = useSlideNav(totalSlides);
+const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo, startAutoplay, autoplayProgress } = useSlideNav(totalSlides);
 
 // Background parallax — orbs shift based on slide index
 const bgStyle = computed(() => {

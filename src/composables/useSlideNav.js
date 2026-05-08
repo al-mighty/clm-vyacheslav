@@ -26,7 +26,10 @@ export function useSlideNav(totalSlides) {
   const isLast = computed(() => current.value === totalSlides - 1);
 
   const autoplay = ref(false);
+  const autoplayProgress = ref(0); // 0..1
   let autoplayTimer = null;
+  let progressTimer = null;
+  const AUTOPLAY_INTERVAL = 5000;
 
   function vibrate() {
     if (navigator.vibrate) navigator.vibrate(15);
@@ -42,18 +45,32 @@ export function useSlideNav(totalSlides) {
 
   function stopAutoplay() {
     autoplay.value = false;
+    autoplayProgress.value = 0;
     clearInterval(autoplayTimer);
+    clearInterval(progressTimer);
     autoplayTimer = null;
+    progressTimer = null;
   }
 
-  function startAutoplay(intervalMs = 5000) {
+  function startProgressBar() {
+    const step = 50; // ms
+    autoplayProgress.value = 0;
+    clearInterval(progressTimer);
+    progressTimer = setInterval(() => {
+      autoplayProgress.value = Math.min(autoplayProgress.value + step / AUTOPLAY_INTERVAL, 1);
+    }, step);
+  }
+
+  function startAutoplay() {
     stopAutoplay();
     autoplay.value = true;
     next();
+    startProgressBar();
     autoplayTimer = setInterval(() => {
       if (current.value >= totalSlides - 1) { stopAutoplay(); return; }
       next();
-    }, intervalMs);
+      startProgressBar();
+    }, AUTOPLAY_INTERVAL);
   }
 
   function goTo(i) {
@@ -90,6 +107,10 @@ export function useSlideNav(totalSlides) {
   onMounted(() => {
     window.addEventListener('keydown', onKey);
     window.addEventListener('wheel', onWheel, { passive: true });
+    // Auto-start slideshow if landing on cover
+    if (current.value === 0) {
+      setTimeout(() => startAutoplay(), 2000);
+    }
     timer = setInterval(() => {
       const totalSec = Math.floor((Date.now() - sessionStart) / 1000);
       const m = String(Math.floor(totalSec / 60)).padStart(2, '0');
@@ -127,6 +148,7 @@ export function useSlideNav(totalSlides) {
     startAutoplay,
     stopAutoplay,
     autoplay,
+    autoplayProgress,
     tracking,
   };
 }

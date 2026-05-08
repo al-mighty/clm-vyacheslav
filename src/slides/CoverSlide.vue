@@ -29,6 +29,13 @@
       </div>
       <button class="cover-cta" @click="$emit('autoplay')">{{ t.cover.cta }}</button>
     </div>
+    <div class="cover-contacts">
+      <a href="mailto:dev.vyacheslav@gmail.com">dev.vyacheslav@gmail.com</a>
+      <span class="dot">&middot;</span>
+      <a href="https://t.me/es_kanor" target="_blank">@es_kanor</a>
+      <span class="dot">&middot;</span>
+      <a href="tel:+79112201606">+7 (911) 220-16-06</a>
+    </div>
   </ClmSlide>
 </template>
 
@@ -72,6 +79,14 @@ const { t } = useI18n();
   padding: 12px 20px; cursor: pointer; background: transparent; transition: all 0.3s;
 }
 .cover-cta:hover { background: var(--accent); color: var(--bg); }
+.cover-contacts {
+  position: absolute; bottom: 80px; left: 0; right: 0;
+  display: flex; justify-content: center; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 11px;
+}
+.cover-contacts a { color: var(--ink-dim); text-decoration: none; transition: color 0.3s; }
+.cover-contacts a:hover { color: var(--accent); }
+.cover-contacts .dot { color: var(--line-2); }
 
 @media (max-width: 900px) {
   .cover-top { flex: none; }
@@ -95,5 +110,7 @@ const { t } = useI18n();
   .cover-stat .num { font-size: 36px; }
   .cover-stat .lbl { font-size: 9px; }
   .cover-cta { font-size: 10px; padding: 10px 16px; }
+  .cover-contacts { flex-direction: column; gap: 6px; bottom: 56px; font-size: 10px; }
+  .cover-contacts .dot { display: none; }
 }
 </style>
