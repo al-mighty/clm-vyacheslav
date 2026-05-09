@@ -35,6 +35,8 @@
       <a href="https://t.me/es_kanor" target="_blank">@es_kanor</a>
       <span class="dot">&middot;</span>
       <a href="tel:+79112201606">+7 (911) 220-16-06</a>
+      <span class="dot">&middot;</span>
+      <a href="./support/" target="_blank" class="support-link">☕ {{ t.cover.support }}</a>
     </div>
   </ClmSlide>
 </template>
@@ -87,6 +89,7 @@ const { t } = useI18n();
 .cover-contacts a { color: var(--ink-dim); text-decoration: none; transition: color 0.3s; }
 .cover-contacts a:hover { color: var(--accent); }
 .cover-contacts .dot { color: var(--line-2); }
+.cover-contacts .support-link { color: #FBBF24; }
 
 @media (max-width: 900px) {
   .cover-top { flex: none; }

@@ -6,6 +6,7 @@ export default {
     stat2: 'Highload API в продакшне',
     stat3: 'Компаний / проектов',
     cta: 'НАЧАТЬ ПРОСМОТР →',
+    support: 'Поддержать',
   },
 
   // Overview

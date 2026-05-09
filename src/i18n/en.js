@@ -6,6 +6,7 @@ export default {
     stat2: 'Highload APIs in production',
     stat3: 'Companies / projects',
     cta: 'START DETAIL →',
+    support: 'Support me',
   },
 
   // Overview
