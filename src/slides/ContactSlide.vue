@@ -15,6 +15,10 @@
         <h3>{{ t.contact.phone }}</h3>
         <a href="tel:+79112201606">+7 (911) 220-16-06</a>
       </div>
+      <div class="contact-item">
+        <h3>{{ t.contact.support }}</h3>
+        <a href="./support/" target="_blank" class="support-link">{{ t.contact.supportLink }}</a>
+      </div>
     </div>
     <div class="demo-grid">
       <div class="demo-section">
@@ -74,13 +78,18 @@ const { t } = useI18n();
 </script>
 
 <style scoped>
-.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 48px; width: 100%; max-width: 800px; }
+.contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; margin-top: 48px; width: 100%; max-width: 800px; }
 .contact-item h3 { color: var(--ink-dim); margin-bottom: 12px; }
 .contact-item a {
   color: var(--accent); font-family: var(--mono); font-size: 14px;
   text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s;
 }
 .contact-item a:hover { border-color: var(--accent); }
+.support-link {
+  color: #FBBF24 !important; border-bottom-color: transparent !important;
+  background: rgba(251, 191, 36, 0.1); padding: 4px 10px; border-radius: 4px;
+}
+.support-link:hover { background: rgba(251, 191, 36, 0.2) !important; }
 
 .demo-grid {
   margin-top: 48px; padding-top: 32px;
@@ -117,7 +126,7 @@ const { t } = useI18n();
 .demo-btn-ghost:hover { border-color: var(--accent); }
 
 @media (max-width: 600px) {
-  .contact-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
+  .contact-grid { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
   .contact-item a { font-size: 13px; }
   .demo-grid { margin-top: 24px; padding-top: 20px; }
   .demo-section { flex-direction: column; align-items: flex-start; }

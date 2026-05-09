@@ -227,6 +227,8 @@ export default {
     email: 'Email',
     telegram: 'Telegram',
     phone: 'Phone',
+    support: 'Support',
+    supportLink: '☕ Donate',
     demo: 'Mobile Demo',
     demoDesc: 'PatternQuest — logic game built with Expo + NestJS',
     demoPlay: 'Play in browser',
