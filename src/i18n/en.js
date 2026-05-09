@@ -232,6 +232,10 @@ export default {
     demoPlay: 'Play in browser',
     demoAndroid: 'Download APK',
     demoSource: 'Source code',
+    demo2: 'ChainPulse',
+    demo2Desc: 'Multi-chain portfolio tracker — Solana + TON, InversifyJS, RxJS',
+    demo2Open: 'Open dashboard',
+    demo2Bot: 'Telegram bot',
   },
 
   // Navigation

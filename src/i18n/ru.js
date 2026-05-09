@@ -232,6 +232,10 @@ export default {
     demoPlay: 'Играть в браузере',
     demoAndroid: 'Скачать APK',
     demoSource: 'Исходный код',
+    demo2: 'ChainPulse',
+    demo2Desc: 'Мультичейн портфолио трекер — Solana + TON, InversifyJS, RxJS',
+    demo2Open: 'Открыть дашборд',
+    demo2Bot: 'Telegram бот',
   },
 
   // Navigation

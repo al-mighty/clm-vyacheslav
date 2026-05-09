@@ -16,26 +16,49 @@
         <a href="tel:+79112201606">+7 (911) 220-16-06</a>
       </div>
     </div>
-    <div class="demo-section">
-      <div class="demo-badge">
-        <span class="demo-icon">&#9654;</span>
-        <div>
-          <h3>{{ t.contact.demo }}</h3>
-          <p class="demo-desc">{{ t.contact.demoDesc }}</p>
+    <div class="demo-grid">
+      <div class="demo-section">
+        <div class="demo-badge">
+          <span class="demo-icon">&#9654;</span>
+          <div>
+            <h3>{{ t.contact.demo }}</h3>
+            <p class="demo-desc">{{ t.contact.demoDesc }}</p>
+          </div>
+        </div>
+        <div class="demo-links">
+          <a href="./game/" class="demo-btn" target="_blank">
+            <span class="demo-btn-icon">&#9654;</span>
+            {{ t.contact.demoPlay }}
+          </a>
+          <a href="./patternquest.apk" class="demo-btn demo-btn-ghost" download>
+            <span class="demo-btn-icon">&#9660;</span>
+            {{ t.contact.demoAndroid }}
+          </a>
+          <a href="https://github.com/al-mighty/patternquest-demo" target="_blank" class="demo-btn demo-btn-ghost">
+            {{ t.contact.demoSource }}
+          </a>
         </div>
       </div>
-      <div class="demo-links">
-        <a href="./game/" class="demo-btn" target="_blank">
-          <span class="demo-btn-icon">&#9654;</span>
-          {{ t.contact.demoPlay }}
-        </a>
-        <a href="./patternquest.apk" class="demo-btn demo-btn-ghost" download>
-          <span class="demo-btn-icon">&#9660;</span>
-          {{ t.contact.demoAndroid }}
-        </a>
-        <a href="https://github.com/al-mighty/patternquest-demo" target="_blank" class="demo-btn demo-btn-ghost">
-          {{ t.contact.demoSource }}
-        </a>
+      <div class="demo-section">
+        <div class="demo-badge">
+          <span class="demo-icon" style="color: var(--accent-2)">&#9830;</span>
+          <div>
+            <h3>{{ t.contact.demo2 }}</h3>
+            <p class="demo-desc">{{ t.contact.demo2Desc }}</p>
+          </div>
+        </div>
+        <div class="demo-links">
+          <a href="./chainpulse/" class="demo-btn" target="_blank" style="background: var(--accent-2); border-color: var(--accent-2)">
+            <span class="demo-btn-icon">&#9654;</span>
+            {{ t.contact.demo2Open }}
+          </a>
+          <a href="https://t.me/CheslavChain_bot" target="_blank" class="demo-btn demo-btn-ghost">
+            {{ t.contact.demo2Bot }}
+          </a>
+          <a href="https://github.com/al-mighty/chainpulse" target="_blank" class="demo-btn demo-btn-ghost">
+            {{ t.contact.demoSource }}
+          </a>
+        </div>
       </div>
     </div>
   </ClmSlide>
@@ -59,11 +82,15 @@ const { t } = useI18n();
 }
 .contact-item a:hover { border-color: var(--accent); }
 
-.demo-section {
+.demo-grid {
   margin-top: 48px; padding-top: 32px;
   border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 24px;
+  width: 100%; max-width: 800px;
+}
+.demo-section {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 32px; width: 100%; max-width: 800px;
+  gap: 32px;
 }
 .demo-badge { display: flex; align-items: center; gap: 16px; }
 .demo-icon {
@@ -92,7 +119,8 @@ const { t } = useI18n();
 @media (max-width: 600px) {
   .contact-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
   .contact-item a { font-size: 13px; }
-  .demo-section { flex-direction: column; align-items: flex-start; margin-top: 32px; padding-top: 24px; }
+  .demo-grid { margin-top: 24px; padding-top: 20px; }
+  .demo-section { flex-direction: column; align-items: flex-start; }
   .demo-links { flex-direction: column; width: 100%; }
   .demo-btn { justify-content: center; font-size: 10px; padding: 10px 14px; }
 }
