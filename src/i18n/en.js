@@ -223,7 +223,7 @@ export default {
   contact: {
     eyebrow: 'Next step',
     title: "Let's <em>talk</em>.",
-    subtitle: 'Open to senior fullstack and architecture-track roles. Remote, hybrid, or relocation considered.',
+    subtitle: 'Open to senior fullstack and architecture-track roles. Remote or hybrid.',
     email: 'Email',
     telegram: 'Telegram',
     phone: 'Phone',
