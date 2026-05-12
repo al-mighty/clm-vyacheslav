@@ -1,135 +1,72 @@
-# CLM Presentation · Vyacheslav Kovalev
+# CLM Portfolio Presentation
 
-CLM-style интерактивная презентация Senior Fullstack Engineer'а в формате Veeva detail aid.
-Vue 3 (CDN, без сборки) — как принято в реальных Veeva CLM проектах.
+Interactive portfolio presentation built as a Closed-Loop Marketing detail aid. Ten themed slides with parallax effects, swipe navigation, autoplay, and full EN/RU localization.
 
----
+**Live:** [cheslav.space](https://cheslav.space)
 
-## Быстрый старт
+## Tech Stack
+
+- **Vue 3** SFC + Composition API
+- **Vite** dev server & production build
+- **i18n** English / Russian toggle
+- **CSS Variables** design tokens, parallax layers
+- Touch swipe (horizontal + vertical) & keyboard navigation
+- Autoplay with configurable interval
+
+## Slides
+
+| # | Slide | Description |
+|---|-------|-------------|
+| 01 | Cover | Animated intro with start button |
+| 02 | Overview | Professional summary |
+| 03 | Pillars | Core competencies with expandable cards |
+| 04 | Timeline | Career history with animated entries |
+| 05 | Stack | Tech stack with animated progress bars |
+| 06 | DNA | Engineering values and principles |
+| 07 | Architecture | Interactive SVG hotspots |
+| 08 | Skills | Categorized skill matrix |
+| 09 | Demos | Live project showcase |
+| 10 | Contact | Links and contact info |
+
+## Getting Started
 
 ```bash
-# Один раз — установить зависимости
 npm install
-
-# Dev-сервер с HMR
-npm run dev          # http://localhost:5173
-
-# Production build → dist/
-npm run build
-
-# Локальный preview собранного билда
-npm run preview
+npm run dev        # http://localhost:5173
 ```
 
-Без сборки тоже всё работает — `index.html` это монолитный single-file
-билд (Vue 3 через CDN), его можно просто открыть в браузере.
+### Production Build
 
-### Два режима жизни проекта
+```bash
+npm run build      # output -> dist/
+npm run preview    # preview production build
+```
 
-- **`index.html`** — монолитный working-build. Vite берёт его как основной
-  entry, в dev-режиме отдаёт с HMR, в production бандлит в `dist/index.html`.
-- **`slides/*`** — модульная структура (HTML-фрагменты). Vite копирует их в
-  `dist/` как есть. Используются как основа для будущей миграции на Vue SFC.
-
----
-
-## Структура проекта
+## Project Structure
 
 ```
 clm-vyacheslav/
-├── index.html                  # working build (single file, Vue CDN)
-├── vite.config.js              # multi-page Vite + post-build copy
-├── package.json                # vite в devDependencies
-├── manifest.json               # Veeva CLM-совместимые метаданные
-├── README.md                   # этот файл
-│
-├── slides/                     # отдельные слайды
-│   ├── 01-cover.html
-│   ├── 02-pillars.html
-│   ├── 03-timeline.html
-│   ├── 04-stack.html
-│   ├── 05-case-domru.html
-│   ├── 06-architecture.html    # interactive hot-spots
-│   ├── 07-skills.html
-│   └── 08-contact.html
-│
-├── shared/
-│   ├── styles/
-│   │   ├── tokens.css          # CSS-переменные (цвета, шрифты)
-│   │   └── base.css            # типографика, layout-примитивы
-│   ├── components/
-│   │   └── nav.js              # Vue-компонент навигации
-│   └── tracking/
-│       └── veeva-clm.js        # обёртка над com.veeva.clm.* API
-│
-├── assets/
-│   ├── fonts/                  # положите сюда кастомные шрифты
-│   └── svg/                    # отдельные SVG-ассеты
-│
-└── docs/
-    ├── ROADMAP.md              # что делать дальше
-    └── VEEVA-INTEGRATION.md    # заметки по упаковке под Veeva
+├── src/
+│   ├── slides/            # 10 Vue SFC slide components
+│   ├── components/        # Shared: navigation, hotspots, topbar, bars
+│   ├── composables/       # useSlideNav, useSwipe, useVeevaTracking
+│   ├── i18n/              # en.js, ru.js locale files
+│   ├── styles/            # Global styles and design tokens
+│   ├── assets/            # Images, SVGs, fonts
+│   ├── App.vue            # Root component with slide engine
+│   └── main.js            # Entry point
+├── index.html
+├── vite.config.js
+└── package.json
 ```
 
----
+## Controls
 
-## Что уже работает
+- **Arrow keys** or **swipe** — navigate between slides
+- **Dots / sidebar** — jump to specific slide
+- **START button** — begin autoplay from cover
+- **Language toggle** — switch EN/RU
 
-- ✅ 8 слайдов с переходами и анимациями
-- ✅ Горизонтальная навигация: стрелки клавиатуры, дотами, кнопками
-- ✅ Hot-spots на SVG (слайд 6) — пульсирующие точки + детальные карточки
-- ✅ Раскрывающиеся карточки (слайд 2 — Three pillars)
-- ✅ Анимированный таймлайн (слайд 3)
-- ✅ Анимация прогресс-баров стека (слайд 4)
-- ✅ Session timer и view time per slide (как в реальном Veeva CLM)
-- ✅ Tracking-заглушка для интеграции с Veeva API
+## Author
 
----
-
-## Что доделать (по приоритету)
-
-См. `docs/ROADMAP.md` — там расписаны следующие шаги:
-
-1. **Real Veeva tracking** — заменить заглушку в `shared/tracking/veeva-clm.js` на реальные вызовы `com.veeva.clm.createRecord` и `com.veeva.clm.getDataForCurrentObject`
-2. **Build system** — добавить Vite для нормальной сборки модульной версии в production-bundle
-3. **Адаптив** — сейчас фиксированная вёрстка под 1024×768 (стандарт iPad). Доработать для разных размеров iPad Pro
-4. **Контент-меню** — overview-слайд со всеми тайлами для быстрой навигации (типичная фишка Veeva CLM)
-5. **i18n** — сейчас mix EN/RU. Если для продакшна — определиться с одним языком
-
----
-
-## Запуск
-
-См. раздел «Быстрый старт» выше — `npm install && npm run dev`. Если node/npm
-недоступны (или нужно показать презентацию вне разработки), `index.html`
-открывается напрямую в браузере без сборки.
-
----
-
-## Управление
-
-- **→** или клик на правую стрелку — следующий слайд
-- **←** или клик на левую стрелку — предыдущий слайд
-- Клик на дот внизу — переход на конкретный слайд
-- Клик на хот-споты на слайде 6 — раскрытие деталей
-
----
-
-## Стек
-
-- **Vue 3** (Composition API, через CDN)
-- **CSS Variables** для дизайн-токенов
-- **Google Fonts**: Fraunces (display) + JetBrains Mono (mono)
-- **No build step** — единственное требование: интернет для CDN
-
-Для production под Veeva можно либо:
-- inline'ить Vue в `index.html` (Veeva принимает offline-bundle)
-- собрать через Vite в `dist/` и упаковать в zip по структуре Veeva
-
-См. `docs/VEEVA-INTEGRATION.md`.
-
----
-
-## Контакты
-
-Vyacheslav Kovalev · dev.vyacheslav@gmail.com · @es_kanor
+Vyacheslav Kovalev — [GitHub](https://github.com/al-mighty) · [cheslav.space](https://cheslav.space)
