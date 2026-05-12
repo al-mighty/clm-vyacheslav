@@ -23,7 +23,9 @@
       <CaseSlide         :active="current === 5" :is-prev="current > 5" />
       <ArchitectureSlide :active="current === 6" :is-prev="current > 6" />
       <SkillsSlide       :active="current === 7" :is-prev="current > 7" />
-      <ContactSlide      :active="current === 8" :is-prev="current > 8" />
+      <DemosSlide        :active="current === 8" :is-prev="current > 8" />
+      <VideoSlide        :active="current === 9" :is-prev="current > 9" />
+      <ContactSlide      :active="current === 10" :is-prev="current > 10" />
     </main>
 
     <ClmNavigation
@@ -53,11 +55,13 @@ import StackSlide from '@/slides/StackSlide.vue';
 import CaseSlide from '@/slides/CaseSlide.vue';
 import ArchitectureSlide from '@/slides/ArchitectureSlide.vue';
 import SkillsSlide from '@/slides/SkillsSlide.vue';
+import DemosSlide from '@/slides/DemosSlide.vue';
+import VideoSlide from '@/slides/VideoSlide.vue';
 import ContactSlide from '@/slides/ContactSlide.vue';
 
 import { useSlideNav } from '@/composables/useSlideNav.js';
 
-const totalSlides = 9;
+const totalSlides = 11;
 const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo, startAutoplay, autoplayProgress } = useSlideNav(totalSlides);
 
 // Background parallax — orbs shift based on slide index

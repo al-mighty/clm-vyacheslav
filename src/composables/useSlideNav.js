@@ -2,7 +2,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useSwipe } from './useSwipe.js';
 import { useVeevaTracking } from './useVeevaTracking.js';
 
-const SLIDE_NAMES = ['cover', 'overview', 'pillars', 'timeline', 'stack', 'case', 'architecture', 'skills', 'contact'];
+const SLIDE_NAMES = ['cover', 'overview', 'pillars', 'timeline', 'stack', 'case', 'architecture', 'skills', 'demos', 'video', 'contact'];
 
 function slideFromHash() {
   const hash = window.location.hash.replace('#', '');

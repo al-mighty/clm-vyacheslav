@@ -220,6 +220,30 @@ export default {
     title: 'Полный <em>набор</em>.',
   },
 
+  // Demos
+  demos: {
+    eyebrow: 'Живые демо',
+    title: 'Собрано <em>и задеплоено</em>.',
+    open: 'Открыть',
+    items: [
+      { icon: '⛓', title: 'ChainPulse', desc: 'Мультичейн портфолио трекер: InversifyJS, RxJS, TON Connect', url: 'https://cheslav.space/chainpulse/', tags: ['Solana', 'TON', 'InversifyJS', 'RxJS', 'NestJS'] },
+      { icon: '🎮', title: 'PatternQuest', desc: 'Логическая игра — Expo React Native + NestJS бэкенд', url: 'https://cheslav.space/game/', tags: ['Expo', 'React Native', 'NestJS', 'WebSocket'] },
+      { icon: '🔍', title: 'DaData Demo', desc: 'Поиск адресов/компаний: Next.js 15 Server Actions + SmartCaptcha', url: 'https://cheslav.space/dadata/', tags: ['Next.js 15', 'Server Actions', 'Zod', 'Captcha'] },
+    ],
+  },
+
+  // Video
+  video: {
+    eyebrow: 'Видео-визитка',
+    title: '30 секунд <em>обо мне</em>.',
+    placeholder: 'Видео скоро появится',
+    stats: [
+      { num: '10+', label: 'Лет в продакшне' },
+      { num: '6M+', label: 'Пользователей' },
+      { num: '5', label: 'Живых проектов' },
+    ],
+  },
+
   // Contact
   contact: {
     eyebrow: 'Следующий шаг',
