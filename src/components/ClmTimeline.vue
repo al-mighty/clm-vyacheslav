@@ -66,18 +66,29 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
 
 const props = defineProps({
   items: { type: Array, required: true },
   active: { type: Boolean, default: false },
+  initialItem: { type: Number, default: null },
+  timelineSlugs: { type: Array, default: () => [] },
 });
 
 const animate = ref(false);
-const selected = ref(null);
+const selected = ref(props.initialItem);
 
 function select(i) {
   selected.value = selected.value === i ? null : i;
+  updateHash();
+}
+
+function updateHash() {
+  if (selected.value !== null && props.timelineSlugs[selected.value]) {
+    history.replaceState(null, '', `#timeline/${props.timelineSlugs[selected.value]}`);
+  } else {
+    history.replaceState(null, '', '#timeline');
+  }
 }
 
 function onKey(e) {
@@ -99,6 +110,8 @@ function onKey(e) {
     selected.value = null;
   }
 }
+
+watch(selected, updateHash);
 
 onMounted(() => {
   requestAnimationFrame(() => { animate.value = true; });

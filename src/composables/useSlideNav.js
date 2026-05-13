@@ -4,14 +4,26 @@ import { useVeevaTracking } from './useVeevaTracking.js';
 
 const SLIDE_NAMES = ['cover', 'overview', 'pillars', 'timeline', 'stack', 'case', 'architecture', 'skills', 'demos', 'contact'];
 
+const TIMELINE_SLUGS = ['elementarno', 'intercomp', 'space307', 'futurecomes', 'citydrive', 'lanck', 'domru', 'heropayments', 'bcharge', 'sber'];
+
 function slideFromHash() {
   const hash = window.location.hash.replace('#', '');
   if (!hash) return 0;
+  // Deep link: timeline/slug
+  if (hash.startsWith('timeline/')) return SLIDE_NAMES.indexOf('timeline');
   const idx = SLIDE_NAMES.indexOf(hash);
   if (idx !== -1) return idx;
   const num = parseInt(hash, 10);
   if (!isNaN(num) && num >= 1 && num <= SLIDE_NAMES.length) return num - 1;
   return 0;
+}
+
+function timelineItemFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash.startsWith('timeline/')) return null;
+  const slug = hash.split('/')[1];
+  const idx = TIMELINE_SLUGS.indexOf(slug);
+  return idx !== -1 ? idx : null;
 }
 
 export function useSlideNav(totalSlides) {
@@ -74,6 +86,7 @@ export function useSlideNav(totalSlides) {
   }
 
   function goTo(i) {
+    stopAutoplay();
     if (i >= 0 && i < totalSlides) current.value = i;
   }
 
@@ -150,5 +163,7 @@ export function useSlideNav(totalSlides) {
     autoplay,
     autoplayProgress,
     tracking,
+    initialTimelineItem: timelineItemFromHash(),
+    TIMELINE_SLUGS,
   };
 }
