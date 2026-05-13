@@ -1,7 +1,7 @@
 <template>
   <ClmSlide num="04" :eyebrow="t.timeline.eyebrow" :active="active" :is-prev="isPrev">
     <h2 v-html="t.timeline.title" />
-    <ClmTimeline :items="t.timeline.items" />
+    <ClmTimeline :items="t.timeline.items" :active="active" />
   </ClmSlide>
 </template>
 

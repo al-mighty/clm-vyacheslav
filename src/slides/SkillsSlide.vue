@@ -49,5 +49,10 @@ const skills = [
   { name: 'Angular', size: '' },
   { name: 'MySQL', size: '' },
   { name: 'Express.js', size: '' },
+  { name: 'Fastify', size: '' },
+  { name: 'NATS', size: '' },
+  { name: 'Lit', size: '' },
+  { name: 'ethers.js', size: '' },
+  { name: 'Sequelize', size: '' },
 ];
 </script>

@@ -35,6 +35,8 @@ const stack = [
   { name: 'Kubernetes', years: 3, alt: false },
   { name: 'GitHub Actions', years: 3, alt: false },
   { name: 'Python', years: 2, alt: true },
+  { name: 'Fastify', years: 2, alt: false },
+  { name: 'NATS', years: 2, alt: true },
 ];
 </script>
 

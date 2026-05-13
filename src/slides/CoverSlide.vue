@@ -23,7 +23,7 @@
           <div class="lbl">{{ t.cover.stat2 }}</div>
         </div>
         <div class="cover-stat">
-          <div class="num">9</div>
+          <div class="num">10</div>
           <div class="lbl">{{ t.cover.stat3 }}</div>
         </div>
       </div>
