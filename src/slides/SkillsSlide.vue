@@ -54,5 +54,9 @@ const skills = [
   { name: 'Lit', size: '' },
   { name: 'ethers.js', size: '' },
   { name: 'Sequelize', size: '' },
+  { name: 'FastAPI', size: '' },
+  { name: 'RAG', size: '' },
+  { name: 'pgvector', size: '' },
+  { name: 'GigaChat', size: '' },
 ];
 </script>
