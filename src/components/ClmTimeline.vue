@@ -1,6 +1,6 @@
 <template>
   <div class="timeline" :class="{ 'has-detail': selected !== null }">
-    <div class="tl-list" :class="{ collapsed: selected !== null }">
+    <div ref="listEl" class="tl-list" :class="{ collapsed: selected !== null, 'scrolled-bottom': scrolledBottom }" @scroll="onScroll">
       <div
         v-for="(t, i) in items"
         :key="i"
@@ -66,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 
 const props = defineProps({
   items: { type: Array, required: true },
@@ -77,6 +77,8 @@ const props = defineProps({
 
 const animate = ref(false);
 const selected = ref(props.initialItem);
+const listEl = ref(null);
+const scrolledBottom = ref(false);
 
 function select(i) {
   selected.value = selected.value === i ? null : i;
@@ -111,7 +113,20 @@ function onKey(e) {
   }
 }
 
-watch(selected, updateHash);
+function onScroll() {
+  if (!listEl.value) return;
+  const el = listEl.value;
+  scrolledBottom.value = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
+}
+
+watch(selected, (val) => {
+  updateHash();
+  // Автоскролл к выбранному элементу
+  if (val !== null && listEl.value) {
+    const item = listEl.value.children[val];
+    if (item) item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+});
 
 onMounted(() => {
   requestAnimationFrame(() => { animate.value = true; });
@@ -124,25 +139,24 @@ onUnmounted(() => {
 
 <style scoped>
 .timeline {
-  flex: 1; display: grid; grid-template-columns: 1fr; gap: 32px;
+  flex: 1; position: relative;
   padding: 8px 0; overflow: hidden;
-  transition: grid-template-columns 0.4s var(--ease-out);
-}
-.timeline.has-detail {
-  grid-template-columns: 1fr 1fr;
 }
 
-/* ===== Vertical list ===== */
+/* ===== Vertical list in two columns ===== */
 .tl-list {
-  display: flex; flex-direction: column; gap: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px;
   overflow-y: auto; padding-right: 8px;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  height: 100%;
 }
 .tl-list::-webkit-scrollbar { width: 3px; }
 .tl-list::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
 
 .tl-item {
-  display: flex; gap: 16px; cursor: pointer;
-  padding: 10px 12px; border-radius: 4px;
+  display: flex; gap: 12px; cursor: pointer;
+  padding: 6px 10px; border-radius: 4px;
   transition: all 0.3s;
 }
 .tl-item:hover { background: rgba(244, 241, 234, 0.03); }
@@ -154,12 +168,12 @@ onUnmounted(() => {
   width: 52px; flex-shrink: 0;
 }
 .tl-year {
-  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  font-family: var(--mono); font-size: 10px; color: var(--accent);
   letter-spacing: 0.1em; white-space: nowrap;
 }
 .tl-line {
   flex: 1; width: 2px; background: var(--line);
-  margin-top: 8px; position: relative;
+  margin-top: 6px; position: relative;
   display: flex; justify-content: center;
 }
 .tl-dot {
@@ -183,15 +197,15 @@ onUnmounted(() => {
 /* Right column: company info */
 .tl-content { flex: 1; min-width: 0; }
 .tl-place {
-  font-family: var(--serif); font-size: 15px; font-weight: 500; line-height: 1.2;
+  font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.2;
 }
 .tl-role {
-  font-family: var(--mono); font-size: 10px; color: var(--ink-dim); margin-top: 2px;
+  font-family: var(--mono); font-size: 9px; color: var(--ink-dim); margin-top: 1px;
 }
 .tl-domain {
-  font-family: var(--mono); font-size: 8px; color: var(--ink-dim);
-  border: 1px solid var(--line-2); padding: 2px 6px;
-  margin-top: 4px; display: inline-block; letter-spacing: 0.05em;
+  font-family: var(--mono); font-size: 7px; color: var(--ink-dim);
+  border: 1px solid var(--line-2); padding: 1px 5px;
+  margin-top: 3px; display: inline-block; letter-spacing: 0.05em;
 }
 
 /* Dim non-selected items when card is open */
@@ -202,10 +216,14 @@ onUnmounted(() => {
 .detail-card {
   border: 1px solid var(--line-2);
   background: var(--bg-2);
-  position: relative;
+  position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 600px; max-width: 90%; max-height: 90%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 .detail-card::before {
   content: '';
@@ -286,15 +304,15 @@ onUnmounted(() => {
 }
 .detail-tag:hover { border-color: var(--accent); background: rgba(212, 255, 58, 0.06); }
 
-/* Card transition */
-.card-expand-enter-active { transition: opacity 0.3s var(--ease-out) 0.1s; }
-.card-expand-leave-active { transition: opacity 0.15s ease-in; }
-.card-expand-enter-from { opacity: 0; }
+/* Card transition — instant, no flicker */
+.card-expand-enter-active { transition: none; }
+.card-expand-leave-active { transition: none; }
+.card-expand-enter-from { opacity: 1; }
 .card-expand-leave-to { opacity: 0; }
 
 /* ===== Tablet ===== */
 @media (max-width: 900px) and (min-width: 601px) {
-  .timeline, .timeline.has-detail { grid-template-columns: 1fr; gap: 16px; }
+  .tl-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
   .tl-list.collapsed { max-height: 80px; overflow: hidden; }
   .detail-year { font-size: 28px; }
   .detail-company { font-size: 20px; }
@@ -303,6 +321,7 @@ onUnmounted(() => {
 /* ===== Mobile ===== */
 @media (max-width: 600px) {
   .timeline, .timeline.has-detail { grid-template-columns: 1fr; gap: 12px; }
+  .tl-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
   .tl-item { padding: 8px 8px; gap: 12px; }
   .tl-left { width: 44px; }
   .tl-year { font-size: 10px; }
