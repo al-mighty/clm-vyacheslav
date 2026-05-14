@@ -234,6 +234,7 @@ export default {
       { icon: '🎮', title: 'PatternQuest', desc: 'Logic game — Expo React Native + NestJS backend', url: 'https://cheslav.space/game/', tags: ['Expo', 'React Native', 'NestJS', 'WebSocket'] },
       { icon: '🔍', title: 'DaData Demo', desc: 'Address/company search with Next.js 15 Server Actions + SmartCaptcha', url: 'https://cheslav.space/dadata/', tags: ['Next.js 15', 'Server Actions', 'Zod', 'Captcha'] },
       { icon: '⚡', title: 'WebRTC SpeedTest', desc: 'P2P latency, bandwidth & packet loss between browsers', url: 'https://cheslav.space/webrtc/speedtest/', tags: ['WebRTC', 'DataChannel', 'WebSocket', 'P2P'] },
+      { icon: '💊', title: 'PharmaRAG', desc: 'AI pharma docs assistant: RAG + GigaChat + pgvector', url: 'https://cheslav.space/pharma-rag/', tags: ['FastAPI', 'pgvector', 'GigaChat', 'RAG', 'React'] },
     ],
   },
 
