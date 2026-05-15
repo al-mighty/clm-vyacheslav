@@ -59,5 +59,7 @@ const skills = [
   { name: 'pgvector', size: '' },
   { name: 'GigaChat', size: '' },
   { name: 'Go', size: '' },
+  { name: 'PixiJS', size: '' },
+  { name: 'Telegram Mini App', size: '' },
 ];
 </script>

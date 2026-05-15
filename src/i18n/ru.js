@@ -236,6 +236,7 @@ export default {
       { icon: '⚡', title: 'WebRTC SpeedTest', desc: 'P2P измерение задержки, пропускной способности и потерь пакетов', url: 'https://cheslav.space/webrtc/speedtest/', tags: ['WebRTC', 'DataChannel', 'WebSocket', 'P2P'] },
       { icon: '💊', title: 'PharmaRAG', desc: 'AI-ассистент по фармдокументации: RAG + GigaChat + pgvector', url: 'https://cheslav.space/pharma-rag/', tags: ['FastAPI', 'pgvector', 'GigaChat', 'RAG', 'React'] },
       { icon: '🔗', title: 'LinkPulse', desc: 'URL-шортенер с аналитикой кликов: Go + Redis + PostgreSQL', url: 'https://cheslav.space/linkpulse/', tags: ['Go', 'chi', 'Redis', 'PostgreSQL', 'React'] },
+      { icon: '🐛', title: 'Bug Survivors', desc: 'Vampire Survivors для IT: 9 ролей, 10 режимов, Telegram Mini App', url: 'https://t.me/BugSurvivorsbot/game', tags: ['PixiJS', 'Go', 'PostgreSQL', 'Telegram'] },
     ],
   },
 
