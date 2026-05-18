@@ -25,6 +25,7 @@ import { mkdirSync, cpSync, writeFileSync, existsSync, rmSync, readdirSync, stat
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { SLIDES, slideNum } from '../src/config/slides.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -32,18 +33,10 @@ const distDir = join(root, 'dist');
 const packDir = join(root, 'veeva-pack');
 const zipFile = join(root, 'veeva-clm.zip');
 
-const slides = [
-  { id: '01-cover', title: 'Cover' },
-  { id: '02-overview', title: 'Overview Menu' },
-  { id: '03-pillars', title: 'Three Pillars' },
-  { id: '04-timeline', title: 'Career Timeline' },
-  { id: '05-stack', title: 'Tech Stack' },
-  { id: '06-case-domru', title: 'Case Dom.ru' },
-  { id: '07-architecture', title: 'Architecture Interactive' },
-  { id: '08-infrastructure', title: 'Personal Production Infra' },
-  { id: '09-skills', title: 'Tooling Spectrum' },
-  { id: '10-contact', title: 'Contact' },
-];
+const slides = SLIDES.map((s, i) => ({
+  id: `${slideNum(i)}-${s.id}`,
+  title: s.title,
+}));
 
 // Clean
 if (existsSync(packDir)) rmSync(packDir, { recursive: true });

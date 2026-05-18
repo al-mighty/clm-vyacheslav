@@ -1,10 +1,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useSwipe } from './useSwipe.js';
 import { useVeevaTracking } from './useVeevaTracking.js';
-
-const SLIDE_NAMES = ['cover', 'overview', 'pillars', 'timeline', 'stack', 'case', 'architecture', 'skills', 'demos', 'contact'];
-
-const TIMELINE_SLUGS = ['elementarno', 'intercomp', 'space307', 'futurecomes', 'citydrive', 'lanck', 'domru', 'heropayments', 'bcharge', 'sber'];
+import { SLIDE_NAMES, TIMELINE_SLUGS } from '@/config/slides.js';
 
 function slideFromHash() {
   const hash = window.location.hash.replace('#', '');

@@ -1,5 +1,5 @@
 <template>
-  <ClmSlide num="09" :eyebrow="t.demos.eyebrow" :active="active" :is-prev="isPrev">
+  <ClmSlide num="10" :eyebrow="t.demos.eyebrow" :active="active" :is-prev="isPrev">
     <h2 v-html="t.demos.title" />
     <div class="demos-grid">
       <div v-for="(demo, i) in t.demos.items" :key="i" class="demo-card" :class="{ 'demo-card--active': activeDemo === i }" @click="activeDemo = i">

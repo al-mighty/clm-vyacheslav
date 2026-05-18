@@ -1,5 +1,5 @@
 <template>
-  <ClmSlide num="09" :eyebrow="t.contact.eyebrow" :active="active" :is-prev="isPrev">
+  <ClmSlide num="11" :eyebrow="t.contact.eyebrow" :active="active" :is-prev="isPrev">
     <h1 v-html="t.contact.title" />
     <p class="lead" style="margin-top: 24px">{{ t.contact.subtitle }}</p>
     <div class="contact-grid">

@@ -1,5 +1,5 @@
 <template>
-  <ClmSlide num="08" :eyebrow="t.skills.eyebrow" :active="active" :is-prev="isPrev">
+  <ClmSlide num="09" :eyebrow="t.skills.eyebrow" :active="active" :is-prev="isPrev">
     <h2 v-html="t.skills.title" />
     <ClmTagCloud :items="skills" />
   </ClmSlide>

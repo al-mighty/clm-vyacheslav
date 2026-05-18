@@ -53,38 +53,13 @@
         </div>
 
         <!-- View 2: layered tiers (interactive) -->
-        <div v-else-if="view === 1" key="layers" class="layers-view">
-          <div class="layers-map">
-            <div
-              v-for="(layer, li) in t.infra.tiers"
-              :key="li"
-              class="tier"
-              :class="{ active: selectedTier === li }"
-              @click="selectTier(li)"
-            >
-              <div class="tier-label">{{ layer.label }}</div>
-              <div class="tier-nodes">
-                <div
-                  v-for="(node, ni) in layer.nodes"
-                  :key="ni"
-                  class="tier-node"
-                  :class="`tier-node--${layer.color}`"
-                >{{ node }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="tier-info">
-            <div v-if="selectedTier === null" class="tier-prompt">{{ t.infra.tierPrompt }}</div>
-            <transition name="view-fade" mode="out-in">
-              <div v-if="selectedTier !== null" :key="selectedTier" class="tier-detail">
-                <div class="tier-detail-label">{{ t.infra.tiers[selectedTier].label }}</div>
-                <div class="tier-detail-text">{{ t.infra.tiers[selectedTier].detail }}</div>
-                <div class="tier-detail-why">
-                  <span class="why-label">Why:</span> {{ t.infra.tiers[selectedTier].why }}
-                </div>
-              </div>
-            </transition>
-          </div>
+        <div v-else-if="view === 1" key="layers">
+          <LayeredDetail
+            :layers="t.infra.tiers"
+            :prompt="t.infra.tierPrompt"
+            size="sm"
+            @select="onTierSelect"
+          />
         </div>
 
         <!-- View 3: story (CI/CD pipeline + lessons) -->
@@ -116,6 +91,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import ClmSlide from '@/components/ClmSlide.vue';
+import LayeredDetail from '@/components/LayeredDetail.vue';
 import { useI18n } from '@/i18n/index.js';
 import { useVeevaTracking } from '@/composables/useVeevaTracking.js';
 
@@ -124,7 +100,6 @@ defineProps({ active: Boolean, isPrev: Boolean });
 const { t } = useI18n();
 const { hotspotClick } = useVeevaTracking();
 const view = ref(0);
-const selectedTier = ref(null);
 const statuses = ref({}); // service id → 'ok' | 'warn' | 'err' | undefined
 
 const tabs = computed(() => t.value.infra.viewTabs);
@@ -135,11 +110,8 @@ function selectView(idx) {
   if (idx === 0) refreshStatuses();
 }
 
-function selectTier(i) {
-  selectedTier.value = selectedTier.value === i ? null : i;
-  if (selectedTier.value !== null) {
-    hotspotClick('08-infrastructure', t.value.infra.tiers[i].label);
-  }
+function onTierSelect(i, tier) {
+  hotspotClick('08-infrastructure', tier.label);
 }
 
 function statusClass(id) {
@@ -250,63 +222,6 @@ refreshStatuses();
   color: var(--ink-dim); letter-spacing: 0.05em;
 }
 
-/* Layers view (reuses arch styling) */
-.layers-view { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; }
-.layers-map { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
-.tier {
-  border: 1px solid var(--line);
-  padding: 10px 14px;
-  cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
-}
-.tier::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: var(--accent); transform: scaleY(0); transform-origin: top;
-  transition: transform 0.4s var(--ease-out);
-}
-.tier:hover { border-color: var(--line-2); }
-.tier:hover::before { transform: scaleY(1); }
-.tier.active { border-color: var(--accent); background: rgba(212, 255, 58, 0.03); }
-.tier.active::before { transform: scaleY(1); }
-
-.tier-label {
-  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--ink-dim); margin-bottom: 6px;
-}
-.tier-nodes { display: flex; gap: 6px; flex-wrap: wrap; }
-.tier-node {
-  font-family: var(--mono); font-size: 10px;
-  padding: 4px 8px; border: 1px solid var(--line-2);
-  background: var(--bg);
-}
-.tier-node--green  { border-color: rgba(212, 255, 58, 0.3); color: var(--accent); }
-.tier-node--orange { border-color: rgba(255, 91, 58, 0.3); color: var(--accent-2); }
-.tier-node--blue   { border-color: rgba(100, 150, 255, 0.3); color: rgba(100, 150, 255, 0.8); }
-.tier-node--yellow { border-color: rgba(255, 200, 50, 0.3); color: rgba(255, 200, 50, 0.8); }
-.tier-node--dim    { border-color: var(--line-2); color: var(--ink-dim); }
-
-.tier-info { display: flex; flex-direction: column; justify-content: center; }
-.tier-prompt { color: var(--ink-dim); font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; }
-.tier-detail-label {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
-}
-.tier-detail-text {
-  font-size: 14px; color: var(--ink-dim); line-height: 1.55;
-  margin-bottom: 12px;
-  border-left: 2px solid var(--accent); padding-left: 16px;
-}
-.tier-detail-why {
-  font-size: 13px; color: var(--ink-dim); line-height: 1.45;
-  padding: 10px 14px; background: rgba(244, 241, 234, 0.03);
-  border: 1px solid var(--line);
-}
-.why-label {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--accent-2); margin-right: 8px;
-}
-
 /* Story view */
 .story-view { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .pipeline { display: flex; flex-direction: column; gap: 10px; }
@@ -351,7 +266,7 @@ refreshStatuses();
 @media (max-width: 700px) {
   .infra-metrics { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .layers-view, .story-view { grid-template-columns: 1fr; }
+  .story-view { grid-template-columns: 1fr; }
   .metric-value { font-size: 20px; }
   .view-tab { padding: 6px 10px; font-size: 9px; }
 }

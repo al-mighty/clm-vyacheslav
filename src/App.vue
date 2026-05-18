@@ -15,17 +15,15 @@
       <button class="clm-arrow left" :disabled="isFirst" @click="prev">&lsaquo;</button>
       <button class="clm-arrow right" :disabled="isLast" @click="next">&rsaquo;</button>
 
-      <CoverSlide       :active="current === 0" :is-prev="current > 0" @next="next" @autoplay="startAutoplay" />
-      <OverviewSlide     :active="current === 1" :is-prev="current > 1" @goto="goTo" />
-      <PillarsSlide      :active="current === 2" :is-prev="current > 2" />
-      <TimelineSlide     :active="current === 3" :is-prev="current > 3" :initial-item="initialTimelineItem" :timeline-slugs="TIMELINE_SLUGS" />
-      <StackSlide        :active="current === 4" :is-prev="current > 4" />
-      <CaseSlide         :active="current === 5" :is-prev="current > 5" />
-      <ArchitectureSlide  :active="current === 6" :is-prev="current > 6" />
-      <InfrastructureSlide :active="current === 7" :is-prev="current > 7" />
-      <SkillsSlide        :active="current === 8" :is-prev="current > 8" />
-      <DemosSlide         :active="current === 9" :is-prev="current > 9" />
-      <ContactSlide       :active="current === 10" :is-prev="current > 10" />
+      <component
+        v-for="(slide, i) in SLIDES"
+        :key="slide.id"
+        :is="slideComponents[slide.component]"
+        :active="current === i"
+        :is-prev="current > i"
+        v-bind="slideProps(slide.id)"
+        v-on="slideHandlers(slide.id)"
+      />
     </main>
 
     <ClmNavigation
@@ -60,9 +58,26 @@ import DemosSlide from '@/slides/DemosSlide.vue';
 import ContactSlide from '@/slides/ContactSlide.vue';
 
 import { useSlideNav } from '@/composables/useSlideNav.js';
+import { SLIDES, TOTAL_SLIDES, TIMELINE_SLUGS } from '@/config/slides.js';
 
-const totalSlides = 11;
-const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo, startAutoplay, autoplayProgress, initialTimelineItem, TIMELINE_SLUGS } = useSlideNav(totalSlides);
+const totalSlides = TOTAL_SLIDES;
+const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo, startAutoplay, autoplayProgress, initialTimelineItem } = useSlideNav(totalSlides);
+
+const slideComponents = {
+  CoverSlide, OverviewSlide, PillarsSlide, TimelineSlide, StackSlide,
+  CaseSlide, ArchitectureSlide, InfrastructureSlide, SkillsSlide, DemosSlide, ContactSlide,
+};
+
+function slideProps(id) {
+  if (id === 'timeline') return { initialItem: initialTimelineItem, timelineSlugs: TIMELINE_SLUGS };
+  return {};
+}
+
+function slideHandlers(id) {
+  if (id === 'cover') return { next, autoplay: startAutoplay };
+  if (id === 'overview') return { goto: goTo };
+  return {};
+}
 
 // Background parallax — orbs shift based on slide index
 const bgStyle = computed(() => {
