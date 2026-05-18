@@ -21,10 +21,11 @@
       <TimelineSlide     :active="current === 3" :is-prev="current > 3" :initial-item="initialTimelineItem" :timeline-slugs="TIMELINE_SLUGS" />
       <StackSlide        :active="current === 4" :is-prev="current > 4" />
       <CaseSlide         :active="current === 5" :is-prev="current > 5" />
-      <ArchitectureSlide :active="current === 6" :is-prev="current > 6" />
-      <SkillsSlide       :active="current === 7" :is-prev="current > 7" />
-      <DemosSlide        :active="current === 8" :is-prev="current > 8" />
-      <ContactSlide      :active="current === 9" :is-prev="current > 9" />
+      <ArchitectureSlide  :active="current === 6" :is-prev="current > 6" />
+      <InfrastructureSlide :active="current === 7" :is-prev="current > 7" />
+      <SkillsSlide        :active="current === 8" :is-prev="current > 8" />
+      <DemosSlide         :active="current === 9" :is-prev="current > 9" />
+      <ContactSlide       :active="current === 10" :is-prev="current > 10" />
     </main>
 
     <ClmNavigation
@@ -53,13 +54,14 @@ import TimelineSlide from '@/slides/TimelineSlide.vue';
 import StackSlide from '@/slides/StackSlide.vue';
 import CaseSlide from '@/slides/CaseSlide.vue';
 import ArchitectureSlide from '@/slides/ArchitectureSlide.vue';
+import InfrastructureSlide from '@/slides/InfrastructureSlide.vue';
 import SkillsSlide from '@/slides/SkillsSlide.vue';
 import DemosSlide from '@/slides/DemosSlide.vue';
 import ContactSlide from '@/slides/ContactSlide.vue';
 
 import { useSlideNav } from '@/composables/useSlideNav.js';
 
-const totalSlides = 10;
+const totalSlides = 11;
 const { current, isFirst, isLast, sessionTime, slideViewTime, next, prev, goTo, startAutoplay, autoplayProgress, initialTimelineItem, TIMELINE_SLUGS } = useSlideNav(totalSlides);
 
 // Background parallax — orbs shift based on slide index

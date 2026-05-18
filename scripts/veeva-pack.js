@@ -40,8 +40,9 @@ const slides = [
   { id: '05-stack', title: 'Tech Stack' },
   { id: '06-case-domru', title: 'Case Dom.ru' },
   { id: '07-architecture', title: 'Architecture Interactive' },
-  { id: '08-skills', title: 'Tooling Spectrum' },
-  { id: '09-contact', title: 'Contact' },
+  { id: '08-infrastructure', title: 'Personal Production Infra' },
+  { id: '09-skills', title: 'Tooling Spectrum' },
+  { id: '10-contact', title: 'Contact' },
 ];
 
 // Clean
