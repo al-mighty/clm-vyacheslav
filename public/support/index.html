@@ -241,12 +241,111 @@
   .footer a:hover { color: var(--accent); }
   .footer .sep { color: var(--line-2); margin: 0 8px; }
 
+  /* Crypto wallets card */
+  .crypto-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+  .crypto-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .crypto-title .goal-icon { background: rgba(139, 92, 246, 0.12); }
+  .crypto-title .crypto-title-text {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .crypto-title .crypto-subtitle {
+    font-size: 12px;
+    color: var(--ink-dim);
+  }
+  .crypto-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .crypto-row {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg-3);
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .crypto-row:hover { border-color: var(--line-2); }
+  .crypto-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .crypto-label .net {
+    display: block;
+    font-size: 9px;
+    color: var(--ink-dim);
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-top: 1px;
+  }
+  .crypto-addr {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    font-size: 12px;
+    color: var(--ink-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .crypto-copy {
+    background: var(--bg-2);
+    border: 1px solid var(--line-2);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .crypto-copy:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .crypto-copy.copied { background: rgba(212, 255, 58, 0.2); color: var(--accent); border-color: var(--accent); }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--accent);
+    color: var(--bg);
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
   @media (max-width: 480px) {
     .container { padding: 32px 16px 60px; }
     h1 { font-size: 24px; }
     .goal { padding: 18px; }
     .goal-amount { font-size: 18px; }
     .goal-header { flex-wrap: wrap; gap: 12px; }
+    .crypto-row { grid-template-columns: 70px 1fr auto; padding: 10px 12px; gap: 8px; }
+    .crypto-addr { font-size: 11px; }
+    .crypto-copy { padding: 5px 10px; font-size: 11px; }
   }
 </style>
 </head>
@@ -321,6 +420,28 @@
 
   </div>
 
+  <div class="crypto-card">
+    <div class="crypto-title">
+      <div class="goal-icon">₿</div>
+      <div>
+        <div class="crypto-title-text">Криптовалюта</div>
+        <div class="crypto-subtitle">для тех кому удобнее в крипте</div>
+      </div>
+    </div>
+    <div class="crypto-list">
+      <div class="crypto-row">
+        <div class="crypto-label">BTC<span class="net">Bitcoin</span></div>
+        <div class="crypto-addr" title="1L3JYBtp87YrdDyZ6T3uXVetciVnDq7KE5">1L3JYBtp87YrdDyZ6T3uXVetciVnDq7KE5</div>
+        <button class="crypto-copy" data-addr="1L3JYBtp87YrdDyZ6T3uXVetciVnDq7KE5" data-label="BTC">📋 Копировать</button>
+      </div>
+      <div class="crypto-row">
+        <div class="crypto-label">USDT<span class="net">TRC-20</span></div>
+        <div class="crypto-addr" title="TDTmYvq2gdniR9yrhi7JiCEpLBpcHbEr5s">TDTmYvq2gdniR9yrhi7JiCEpLBpcHbEr5s</div>
+        <button class="crypto-copy" data-addr="TDTmYvq2gdniR9yrhi7JiCEpLBpcHbEr5s" data-label="USDT (TRC-20)">📋 Копировать</button>
+      </div>
+    </div>
+  </div>
+
   <div class="story">
     <h3>Немного контекста</h3>
     <p>Привет! Меня зовут Вячеслав, мне 32 года, живу в Санкт-Петербурге. Больше 10 лет в коммерческой разработке — Node.js, React, TypeScript, Python. Последнее место — Сбер, сейчас на бенче в аутстафф-компании и активно ищу новую позицию. Ипотека и ремонт в новостройке не ждут. Любая помощь — огромная поддержка. Спасибо, что зашли на эту страницу.</p>
@@ -336,5 +457,49 @@
     <a href="mailto:dev.vyacheslav@gmail.com">Email</a>
   </div>
 </div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  var toast = document.getElementById('toast');
+  var toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.crypto-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var addr = btn.getAttribute('data-addr');
+      var label = btn.getAttribute('data-label');
+      var done = function () {
+        btn.classList.add('copied');
+        btn.textContent = '✓ Скопировано';
+        showToast(label + ' адрес скопирован');
+        setTimeout(function () {
+          btn.classList.remove('copied');
+          btn.textContent = '📋 Копировать';
+        }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done).catch(function () { fallbackCopy(addr); done(); });
+      } else {
+        fallbackCopy(addr); done();
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
