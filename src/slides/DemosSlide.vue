@@ -18,6 +18,7 @@
     <div v-if="activeDemo !== null" class="demo-preview">
       <div class="demo-preview-bar">
         <span class="demo-preview-url">{{ t.demos.items[activeDemo].url }}</span>
+        <a v-if="t.demos.items[activeDemo].tgUrl" :href="t.demos.items[activeDemo].tgUrl" target="_blank" class="demo-preview-open">Telegram ↗</a>
         <a :href="t.demos.items[activeDemo].url" target="_blank" class="demo-preview-open">{{ t.demos.open }} ↗</a>
       </div>
       <iframe :src="t.demos.items[activeDemo].url" class="demo-iframe" frameborder="0" />

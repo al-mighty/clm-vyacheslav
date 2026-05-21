@@ -324,7 +324,7 @@ export default {
       { icon: '⚡', title: 'WebRTC SpeedTest', desc: 'P2P latency, bandwidth & packet loss between browsers', url: 'https://cheslav.space/webrtc/speedtest/', tags: ['WebRTC', 'DataChannel', 'WebSocket', 'P2P'] },
       { icon: '💊', title: 'PharmaRAG', desc: 'AI pharma docs assistant: RAG + GigaChat + pgvector', url: 'https://cheslav.space/pharma-rag/', tags: ['FastAPI', 'pgvector', 'GigaChat', 'RAG', 'React'] },
       { icon: '🔗', title: 'LinkPulse', desc: 'URL shortener with click analytics: Go + Redis + PostgreSQL', url: 'https://cheslav.space/linkpulse/', tags: ['Go', 'chi', 'Redis', 'PostgreSQL', 'React'] },
-      { icon: '🐛', title: 'Bug Survivors', desc: 'Vampire Survivors for IT: 9 roles, 10 modes, Telegram Mini App', url: 'https://t.me/BugSurvivorsbot/game', tags: ['PixiJS', 'Go', 'PostgreSQL', 'Telegram'] },
+      { icon: '🐛', title: 'Bug Survivors', desc: 'Vampire Survivors for IT: 9 roles, 10 modes, Telegram Mini App', url: 'https://cheslav.space/survivors/', tgUrl: 'https://t.me/BugSurvivorsbot/game', tags: ['PixiJS', 'Go', 'PostgreSQL', 'Telegram'] },
     ],
   },
 
