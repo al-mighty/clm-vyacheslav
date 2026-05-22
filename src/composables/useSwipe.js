@@ -1,12 +1,14 @@
 import { onMounted, onUnmounted } from 'vue';
 
-export function useSwipe(onLeft, onRight, { minDistance = 50 } = {}) {
+export function useSwipe(onLeft, onRight, { minDistance = 60 } = {}) {
   let startX = 0;
   let startY = 0;
+  let startTime = 0;
 
   const onTouchStart = (e) => {
     startX = e.changedTouches[0].clientX;
     startY = e.changedTouches[0].clientY;
+    startTime = Date.now();
   };
 
   const onTouchEnd = (e) => {
@@ -14,15 +16,17 @@ export function useSwipe(onLeft, onRight, { minDistance = 50 } = {}) {
     const dy = e.changedTouches[0].clientY - startY;
     const absDx = Math.abs(dx);
     const absDy = Math.abs(dy);
+    const dt = Date.now() - startTime;
 
-    // Horizontal swipe — left/right
-    if (absDx > absDy && absDx > minDistance) {
-      dx < 0 ? onLeft() : onRight();
-    }
-    // Vertical swipe — down=next, up=prev
-    else if (absDy > absDx && absDy > minDistance) {
-      dy < 0 ? onLeft() : onRight();
-    }
+    // Only accept clearly horizontal, fast gestures. Vertical movement
+    // means the user is trying to scroll the page — never swap slides on
+    // it. The 1.5× ratio rejects diagonals, and the 500ms cap rejects
+    // slow drags (text selection, accidental long-press scrolls).
+    if (dt > 500) return;
+    if (absDx < minDistance) return;
+    if (absDx < absDy * 1.5) return;
+
+    dx < 0 ? onLeft() : onRight();
   };
 
   onMounted(() => {

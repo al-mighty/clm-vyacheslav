@@ -38,6 +38,7 @@ export function useSlideNav(totalSlides) {
   const autoplayProgress = ref(0); // 0..1
   let autoplayTimer = null;
   let progressTimer = null;
+  let autoplayStartTimer = null;
   const AUTOPLAY_INTERVAL = 5000;
 
   function vibrate() {
@@ -57,8 +58,13 @@ export function useSlideNav(totalSlides) {
     autoplayProgress.value = 0;
     clearInterval(autoplayTimer);
     clearInterval(progressTimer);
+    // Also cancel the deferred start scheduled on mount — without this
+    // the user could swipe in the first 2 seconds, and the pending
+    // setTimeout would still fire and yank them forward another slide.
+    clearTimeout(autoplayStartTimer);
     autoplayTimer = null;
     progressTimer = null;
+    autoplayStartTimer = null;
   }
 
   function startProgressBar() {
@@ -99,17 +105,25 @@ export function useSlideNav(totalSlides) {
     () => { stopAutoplay(); prev(); },
   );
 
-  // Wheel scroll navigation (debounced)
-  let wheelLocked = false;
+  // Wheel scroll navigation. Trackpads emit an inertia tail of ~1.5s after
+  // a single swipe; a fixed-duration lock isn't enough — it unlocks while
+  // the tail is still arriving and the user sails through extra slides.
+  // Instead, fire once, then require ~250ms of *silence* (no wheel event)
+  // before accepting the next one.
+  let wheelArmed = true;
+  let wheelQuietTimer = null;
   function onWheel(e) {
-    if (wheelLocked) return;
     const delta = e.deltaY || e.detail;
     if (Math.abs(delta) < 30) return;
-    wheelLocked = true;
+    // Any wheel event resets the quiet window — only after the user
+    // truly stops scrolling do we re-arm.
+    clearTimeout(wheelQuietTimer);
+    wheelQuietTimer = setTimeout(() => { wheelArmed = true; }, 250);
+    if (!wheelArmed) return;
+    wheelArmed = false;
     stopAutoplay();
     if (delta > 0) next();
     else prev();
-    setTimeout(() => { wheelLocked = false; }, 600);
   }
 
   // Timer
@@ -117,9 +131,15 @@ export function useSlideNav(totalSlides) {
   onMounted(() => {
     window.addEventListener('keydown', onKey);
     window.addEventListener('wheel', onWheel, { passive: true });
-    // Auto-start slideshow if landing on cover
+    // Auto-start slideshow if landing on cover. Guard inside the timer:
+    // the user may swipe/click/scroll during the 2s delay, and we don't
+    // want to override their intent by starting autoplay on whatever
+    // slide they navigated to.
     if (current.value === 0) {
-      setTimeout(() => startAutoplay(), 2000);
+      autoplayStartTimer = setTimeout(() => {
+        autoplayStartTimer = null;
+        if (current.value === 0) startAutoplay();
+      }, 2000);
     }
     timer = setInterval(() => {
       const totalSec = Math.floor((Date.now() - sessionStart) / 1000);
@@ -134,6 +154,7 @@ export function useSlideNav(totalSlides) {
     window.removeEventListener('keydown', onKey);
     window.removeEventListener('wheel', onWheel);
     clearInterval(timer);
+    clearTimeout(wheelQuietTimer);
     stopAutoplay();
   });
 
