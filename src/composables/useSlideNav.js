@@ -164,8 +164,29 @@ export function useSlideNav(totalSlides) {
     tracking.slideView(`slide-${newVal}`, `Slide ${newVal + 1}`);
     slideEnter.value = Date.now();
     slideViewTime.value = 0;
-    history.replaceState(null, '', `#${SLIDE_NAMES[newVal] || newVal + 1}`);
+    const slug = SLIDE_NAMES[newVal] || String(newVal + 1);
+    history.replaceState(null, '', `#${slug}`);
+    // Yandex Metrika pageview. The shared loader has ssr:true (no auto-
+    // hit), so each slide change has to ping explicitly. Hash routes
+    // matter for Metrika's "page" reports because we change history.
+    if (typeof window !== 'undefined' && typeof window.ym === 'function') {
+      window.ym(109033343, 'hit', location.pathname + '#' + slug);
+    }
   });
+
+  // Initial pageview for the first slide. `watch` only fires on changes,
+  // so without this the very first slide never gets a hit. ym may not be
+  // loaded yet — the queue stub on window.ym swallows it safely.
+  if (typeof window !== 'undefined') {
+    const initialSlug = SLIDE_NAMES[current.value] || String(current.value + 1);
+    const fireInitial = () => {
+      if (typeof window.ym === 'function') {
+        window.ym(109033343, 'hit', location.pathname + '#' + initialSlug);
+      }
+    };
+    // Give the metrika.js loader a tick to attach the stub.
+    setTimeout(fireInitial, 0);
+  }
 
   return {
     current,
