@@ -5,8 +5,11 @@
       <div v-for="(demo, i) in t.demos.items" :key="i" class="demo-card" :class="{ 'demo-card--active': activeDemo === i }" @click="activeDemo = i">
         <div class="demo-card-header">
           <span class="demo-icon">{{ demo.icon }}</span>
-          <div>
-            <h3>{{ demo.title }}</h3>
+          <div style="flex: 1; min-width: 0;">
+            <h3>
+              {{ demo.title }}
+              <span v-if="demo.internal" class="demo-badge demo-badge--internal" title="Внутренний инструмент — требует авторизации">INTERNAL</span>
+            </h3>
             <p>{{ demo.desc }}</p>
           </div>
         </div>
@@ -50,6 +53,14 @@ const activeDemo = ref(0);
 .demo-icon { font-size: 24px; flex-shrink: 0; }
 .demo-card h3 { font-size: 14px; font-weight: 500; color: var(--ink); }
 .demo-card p { font-size: 11px; color: var(--ink-dim); margin-top: 2px; line-height: 1.4; }
+.demo-badge {
+  display: inline-block; vertical-align: middle; margin-left: 6px;
+  font-family: var(--mono); font-size: 8px; font-weight: 600; letter-spacing: 0.12em;
+  padding: 2px 5px; border-radius: 3px; line-height: 1;
+}
+.demo-badge--internal {
+  color: #ffb454; background: rgba(255, 180, 84, 0.12); border: 1px solid rgba(255, 180, 84, 0.4);
+}
 .demo-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px; }
 .demo-tag {
   font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
